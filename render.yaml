@@ -2,8 +2,8 @@ services:
   - type: web
     name: portfolio-website
     runtime: node
-    buildCommand: npm install --legacy-peer-deps && npm install typescript @types/react @types/node @types/react-dom --save-dev && npm run build
-    startCommand: npm start
+    buildCommand: yarn install && yarn build
+    startCommand: yarn start
     envVars:
       - key: NODE_ENV
         value: production
