@@ -2,8 +2,8 @@ services:
   - type: web
     name: portfolio-website
     runtime: node
-    buildCommand: yarn install && yarn build
-    startCommand: yarn start
+    buildCommand: npm install --legacy-peer-deps && npm run build
+    startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
