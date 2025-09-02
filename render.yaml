@@ -2,7 +2,7 @@ services:
   - type: web
     name: portfolio-website
     runtime: node
-    buildCommand: npm install && npm run build
+    buildCommand: npm ci && npm run build
     startCommand: npm start
     envVars:
       - key: NODE_ENV
