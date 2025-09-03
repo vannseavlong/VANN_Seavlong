@@ -51,8 +51,8 @@ A modern, responsive portfolio website built with Next.js, TypeScript, and Tailw
    - Update the EmailJS configuration in `src/components/Contact.tsx`
 
 4. Add your images:
-   - Add your profile image as `public/images/profile.jpg`
-   - Add your professional image as `public/images/professional.jpg`
+   - Add your profile image as `public/images/profile.webp`
+   - Add your professional image as `public/images/professional.webp`
    - Add education images as needed
 
 5. Run the development server:

@@ -2,10 +2,10 @@
 
 Please add your images to this directory:
 
-- `profile.jpg` - Your main profile image for the hero section
-- `professional.jpg` - Your professional image for the about section
-- `university.jpg` - Your university/college image
-- `highschool.jpg` - Your high school image
+- `profile.webp` - Your main profile image for the hero section
+- `professional.webp` - Your professional image for the about section
+- `university.webp` - Your university/college image
+- `highschool.webp` - Your high school image
 
 **Recommended image sizes:**
 - Profile images: 400x400px (square format)

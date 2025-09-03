@@ -51,7 +51,7 @@ const Navbar = () => {
               onClick={() => scrollToSection('#home')}
             >
               <Image
-                src="/images/Me.png"
+                src="/images/Me.webp"
                 alt="VANN Seavlong Logo"
                 width={40}
                 height={40}

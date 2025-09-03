@@ -107,7 +107,7 @@ const Hero = () => {
               className="relative w-80 h-80 rounded-full overflow-hidden shadow-2xl border-4 border-white"
             >
               <Image
-                src="/images/profile.jpg"
+                src="/images/profile.webp"
                 alt="VANN Seavlong"
                 fill
                 className="object-cover"

@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta name="description" content="VANN Seavlong - Software Engineer & Full Stack Developer Portfolio" />
-        <link rel="icon" href="/images/Me.png" />
+        <link rel="icon" href="/images/Me.webp" />
       </Head>
       <body>
         <Main />

@@ -36,7 +36,7 @@ const About = () => {
               className="relative w-80 h-96 sm:w-96 sm:h-[28rem] rounded-lg overflow-hidden shadow-2xl"
             >
               <Image
-                src="/images/professionalImg.jpg"
+                src="/images/about.webp"
                 alt="VANN Seavlong Professional Photo"
                 fill
                 className="object-cover object-center"

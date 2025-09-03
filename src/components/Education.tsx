@@ -14,7 +14,7 @@ const Education = () => {
         'Year 2: GPA 3.0/4.0',
         'Year 3: In progress'
       ],
-      image: '/images/camtech.png'
+      image: '/images/camtech.webp'
     },
     {
       degree: 'Foundation Year at ITC',
@@ -26,7 +26,7 @@ const Education = () => {
         'Foundation Certificate in Engineering',
         'GPA: 2.5/4.0'
       ],
-      image: '/images/ITC.png'
+      image: '/images/ITC.webp'
     },
     {
       degree: 'High School',
@@ -38,7 +38,7 @@ const Education = () => {
         'Mathematics: Grade A',
         'Physics/Chemistry: Grade A'
       ],
-      image: '/images/GIS.png'
+      image: '/images/GIS.webp'
     }
   ]
 
