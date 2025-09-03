@@ -17,7 +17,7 @@ const Experience = () => {
       achievements: [
         'Integrate everything together',
         'Prediction accuracy improvement',
-        'Members: Bin Sodina, Nhek ChanPanha, Hong Pimolsaknan, VANN Seavlong (Me)'
+        'Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong Pimolsaknan, VANN Seavlong (Me)'
       ]
     },
     {
@@ -29,7 +29,7 @@ const Experience = () => {
       achievements: [
         'Integrate everything together',
         'Prediction accuracy improvement',
-        'Members: Bin Sodina, Nhek ChanPanha, Hong Pimolsaknan, VANN Seavlong (Me)'
+        'Members: VANN Seavlong'
       ]
     },
     {
@@ -51,7 +51,7 @@ const Experience = () => {
       achievements: [
         'Learn MySQL queries',
         'OOP Concepts unlock',
-        'Members: Bin Sodina, Nhek ChanPanha, Hong PimolSaknan, VANN Seavlong (Me)'
+        'Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong PimolSaknan, VANN Seavlong (Me)'
       ]
     },
     {
@@ -83,7 +83,7 @@ const Experience = () => {
       title: 'Flappy Bird Game Clone',
       duration: 'April 2023 - June 2023',
       description: 'Learn how to build a Flappy Bird game clone using Python and Pygame. This project allow me to understand some basic game development using Pygame.',
-      technologies: ['Pythong', 'Pygame'],
+      technologies: ['Python', 'Pygame'],
       githubLink: 'https://github.com/LONGCELOT/FlappyBird.git',
       achievements: [
         'Implemented a good graphics and sound effects from open-source resources',
