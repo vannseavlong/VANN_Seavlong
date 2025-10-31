@@ -20,6 +20,11 @@ body {
   color: #1F2937;
 }
 
+/* Prevent horizontal overflow on small / responsive screens */
+html, body {
+  overflow-x: hidden;
+}
+
 .section-padding {
   @apply py-20 px-4 sm:px-6 lg:px-8;
 }
