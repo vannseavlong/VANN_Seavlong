@@ -1,6 +1,6 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import React from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 const About = () => {
   return (
@@ -17,7 +17,8 @@ const About = () => {
             About <span className="text-gradient">Me</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Get to know more about who I am, what I do, and what I'm passionate about
+            Get to know more about who I am, what I do, and what I'm passionate
+            about
           </p>
         </motion.div>
 
@@ -56,26 +57,47 @@ const About = () => {
             <h3 className="text-3xl font-bold text-gray-900">
               Hello! I'm VANN Seavlong
             </h3>
-            
+
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                Hello! I'm a third-year CamTech University student studying software engineering. I'm currently delving deeply into frontend skill. I focus on React vite using plugin UI component and Tailwind CSS plus API integration. I'm also exploring backend development, investigating full-stack workflows, and learning how to turn ideas into functional, clean, and user-friendly websites.
+                I'm a third-year CamTech University student studying software
+                engineering. I'm currently delving deeply into frontend skill. I
+                focus on React vite using plugin UI component shadcn and
+                Tailwind CSS plus API integration. I'm also exploring backend
+                development, investigating full-stack workflows, and learning
+                how to turn ideas into functional, clean, and user-friendly
+                websites/systems.
               </p>
-              
+
               <p>
-                I enjoy exploring and  building website because it can help me to enhance my fundamental skill related to both frontend and backend. Recently, I've been working on a project using React.js as a frontend and Node.js + Express.js as backend with Postman API following by mysql database with sequelize.
+                I enjoy exploring and  building website because it can help me
+                to enhance my fundamental skill related to both frontend and
+                backend. Recently, I've been working on a project using React.js
+                as a frontend and Node.js + Express.js as backend with Postman
+                API following by mysql database with sequelize. I also try to do
+                something crazy like building a full-stack website using Next.js
+                as frontend and Express.js as backend with Google Sheet haha.
+                User will login using OAuth2.0 and all of data will be stored in
+                their own Google Sheet, I will not access their data. This idea
+                comming to my mind when I think of something that I can reduce
+                cost on hosting database.This project is still in progress, it
+                will up soon I promise.
               </p>
-              
+
               <p>
-                There’s still a lot of things I don’t know, but I will keep going. 
-                As a Software Engineering student, I am passionate about integrating new technologies into key sectors in my country. My goal is to work in a software company where I can grow professionally while gaining knowledge in other fields.
-                Feel free to scroll through, check out my work, and reach out if anything sparks your interest.
+                There’s still a lot of things I don’t know, but I will keep
+                going. As a Software Engineering student, I am passionate about
+                integrating new technologies into key sectors in my country. My
+                goal is to work in a software company where I can grow
+                professionally while gaining knowledge in other fields. Feel
+                free to scroll through, check out my work, and reach out if
+                anything sparks your interest.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-6 mt-8">              
+            <div className="grid grid-cols-2 gap-6 mt-8">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <h4 className="text-2xl font-bold text-primary">10+</h4>
+                <h4 className="text-2xl font-bold text-primary">7</h4>
                 <p className="text-gray-600">School Projects Completed</p>
               </div>
               <div className="text-center p-4 bg-blue-50 rounded-lg">
@@ -87,7 +109,7 @@ const About = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default About
+export default About;

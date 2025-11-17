@@ -1,25 +1,28 @@
-import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import Image from 'next/image'
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 const Hero = () => {
-  const [currentTitle, setCurrentTitle] = useState(0)
+  const [currentTitle, setCurrentTitle] = useState(0);
   const titles = [
-    'Software Engineering',
-    'Web Frontend Developer',
+    "Software Engineering",
+    "Web Frontend Developer",
     // 'Backend Express Developer',
     // 'Full Stack Developer'
-  ]
+  ];
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTitle((prev) => (prev + 1) % titles.length)
-    }, 3000)
-    return () => clearInterval(interval)
-  }, [titles.length])
+      setCurrentTitle((prev) => (prev + 1) % titles.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [titles.length]);
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+    <section
+      id="home"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100"
+    >
       <div className="container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
@@ -35,12 +38,9 @@ const Hero = () => {
               transition={{ delay: 0.2 }}
               className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6"
             >
-              Hello, I'm{' '}
-              <span className="text-gradient">
-                VANN Seavlong
-              </span>
+              Hello, I'm <span className="text-gradient">VANN Seavlong</span>
             </motion.h1>
-            
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -65,8 +65,11 @@ const Hero = () => {
               transition={{ delay: 0.6 }}
               className="text-lg text-gray-600 mb-8 max-w-2xl"
             >
-              Passionate about creating innovative web solutions and building robust backend systems. 
-              I love turning complex problems into simple, beautiful, and intuitive solutions.
+              Passionate about creating innovative web solutions and building
+              robust backend systems. I love turning complex problems into
+              simple, beautiful, and intuitive solutions. It brings me here and
+              I need to learn more to improve myself for doing all of these
+              things.
             </motion.p>
 
             <motion.div
@@ -79,7 +82,11 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn-primary"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById("contact")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
               >
                 Get In Touch
               </motion.button>
@@ -87,7 +94,11 @@ const Hero = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn-secondary"
-                onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() =>
+                  document
+                    .getElementById("about")
+                    ?.scrollIntoView({ behavior: "smooth" })
+                }
               >
                 Learn More
               </motion.button>
@@ -138,7 +149,7 @@ const Hero = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

@@ -1,32 +1,34 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { FaTrophy, FaMedal, FaAward, FaStar } from 'react-icons/fa'
+import React from "react";
+import { motion } from "framer-motion";
+import { FaTrophy, FaMedal, FaAward, FaStar } from "react-icons/fa";
 
 const Awards = () => {
   const awards = [
     {
-      title: 'Achieving Grade A for Nation Examination',
-      organization: 'GloLink International School',
-      year: '2021',
-      description: 'Achieved Grade A in the National Examination, demonstrating exceptional academic performance.',
+      title: "Achieving Grade A for Nation Examination",
+      organization: "GloLink International School",
+      year: "2021",
+      description:
+        "Achieved Grade A in the National Examination, demonstrating exceptional academic performance.",
       icon: FaTrophy,
-      color: '#FFD700'
+      color: "#FFD700",
     },
     {
-      title: 'Engineering Foundation Year at ITC',
-      organization: 'Institute of Technology of Cambodia',
-      year: '2022',
-      description: 'Finished foundation year with a focus on engineering principles.',
+      title: "Engineering Foundation Year at ITC",
+      organization: "Institute of Technology of Cambodia",
+      year: "2022",
+      description:
+        "Finished foundation year with a focus on engineering principles.",
       icon: FaMedal,
-      color: '#C0C0C0'
+      color: "#C0C0C0",
     },
     {
-      title: 'Techno Tech Innovation',
-      organization: 'Khmer Enterprise',
-      year: '2023',
-      description: 'Participated and win the first round prize',
+      title: "Techno Tech Innovation",
+      organization: "Khmer Enterprise",
+      year: "2023",
+      description: "Participated and win the first round prize",
       icon: FaAward,
-      color: '#CD7F32'
+      color: "#CD7F32",
     },
     // {
     //   title: 'Dean\'s List Achievement',
@@ -52,7 +54,7 @@ const Awards = () => {
     //   icon: FaMedal,
     //   color: '#C0C0C0'
     // }
-  ]
+  ];
 
   return (
     <section id="awards" className="section-padding bg-white">
@@ -68,7 +70,8 @@ const Awards = () => {
             Awards & <span className="text-gradient">Recognition</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Achievements and recognition that highlight my dedication to excellence
+            Achievements and recognition that highlight my dedication to
+            excellence
           </p>
         </motion.div>
 
@@ -85,7 +88,7 @@ const Awards = () => {
             >
               <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-blue-50 to-indigo-100 mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <award.icon 
+                  <award.icon
                     className="w-8 h-8"
                     style={{ color: award.color }}
                   />
@@ -111,7 +114,7 @@ const Awards = () => {
         </div>
 
         {/* Additional Recognition Section */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -147,10 +150,10 @@ const Awards = () => {
               ))}
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Awards
+export default Awards;
