@@ -1,124 +1,148 @@
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa'
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState('projects')
-  const [showAllProjects, setShowAllProjects] = useState(false)
-  const [showAllInternships, setShowAllInternships] = useState(false)
+  const [activeTab, setActiveTab] = useState("projects");
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllInternships, setShowAllInternships] = useState(false);
 
   const schoolProjects = [
     {
-      title: 'Air Quality Monitoring System',
-      duration: 'June 2025 - August 2025',
-      description: 'Learn to create an air quality monitoring system using Flutter, FastAPI, connected to Open-meteo live sensor data.',
-      technologies: ['Flutter', 'FastAPI', 'open-meteo', 'XGBOOST model selection'],
-      githubLink: 'https://github.com/LONGCELOT/Air_Quality_Prediction/',
+      title: "Air Quality Monitoring System",
+      duration: "June 2025 - August 2025",
+      description:
+        "Learn to create an air quality monitoring system using Flutter, FastAPI, connected to Open-meteo live sensor data.",
+      technologies: [
+        "Flutter",
+        "FastAPI",
+        "open-meteo",
+        "XGBOOST model selection",
+      ],
+      githubLink: "https://github.com/LONGCELOT/Air_Quality_Prediction/",
       achievements: [
-        'Integrate everything together',
-        'Prediction accuracy improvement',
-        'Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong Pimolsaknan, VANN Seavlong (Me)'
-      ]
+        "Integrate everything together",
+        "Prediction accuracy improvement",
+        "Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong Pimolsaknan, VANN Seavlong (Me)",
+      ],
     },
     {
-      title: 'Quiz App',
-      duration: 'June 2025 - August 2025',
-      description: 'Learn to create a quiz app using Flutter and provided API integration',
-      technologies: ['Flutter', 'API integration'],
-      githubLink: 'https://github.com/LONGCELOT/quizApp/',
+      title: "Quiz App",
+      duration: "June 2025 - August 2025",
+      description:
+        "Learn to create a quiz app using Flutter and provided API integration",
+      technologies: ["Flutter", "API integration"],
+      githubLink: "https://github.com/LONGCELOT/quizApp/",
       achievements: [
-        'Integrate everything together',
-        'Prediction accuracy improvement',
-        'Members: VANN Seavlong'
-      ]
+        "Integrate everything together",
+        "Prediction accuracy improvement",
+        "Members: VANN Seavlong",
+      ],
     },
     {
-      title: 'Movie Booking Ticket System',
-      duration: 'January 2025 - May 2025',
-      description: 'Learn to create a movie booking ticket system using React vite, express, connected to a share database server on Heidy SQL.',
-      technologies: ['React.js', 'Express.js', 'MySQL','Heidy SQL'],
+      title: "Movie Booking Ticket System",
+      duration: "January 2025 - May 2025",
+      description:
+        "Learn to create a movie booking ticket system using React vite, express, connected to a share database server on Heidy SQL.",
+      technologies: ["React.js", "Express.js", "MySQL", "Heidy SQL"],
       achievements: [
-        'Learn MySQL queries',
-        'OOP Concepts unlock',
-        'Members: Bin Sodina, Nhek ChanPanha, VANN Seavlong (Me)'
-      ]
+        "Learn MySQL queries",
+        "OOP Concepts unlock",
+        "Members: Bin Sodina, Nhek ChanPanha, VANN Seavlong (Me)",
+      ],
     },
     {
-      title: 'Academic Record System Database + Figma UI',
-      duration: 'July 2024 - August 2024',
-      description: 'Learn to design a database schema with relationship, ER-Diagram and create a user-friendly UX/UI interface for managing academic records.',
-      technologies: ['MySQL', 'Figma', 'Mamp server Php my admin'],
+      title: "Academic Record System Database + Figma UI",
+      duration: "July 2024 - August 2024",
+      description:
+        "Learn to design a database schema with relationship, ER-Diagram and create a user-friendly UX/UI interface for managing academic records.",
+      technologies: ["MySQL", "Figma", "Mamp server Php my admin"],
       achievements: [
-        'Learn MySQL queries',
-        'OOP Concepts unlock',
-        'Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong PimolSaknan, VANN Seavlong (Me)'
-      ]
+        "Learn MySQL queries",
+        "OOP Concepts unlock",
+        "Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong PimolSaknan, VANN Seavlong (Me)",
+      ],
     },
     {
-      title: 'Rice Quality Detection System',
-      duration: 'July 2024 - August 2024',
-      description: 'Created own dataset and trained a model to detect the quality of rice. This project allowed me to understand the basics of machine learning and image classification. Yet this project is not fully completed due to time limitations.',
-      technologies: ['Python', 'Roboflow', 'TensorFlow'],
-      githubLink: 'https://github.com/LONGCELOT/Rice-Qualification-Detection.git',
+      title: "Rice Quality Detection System",
+      duration: "July 2024 - August 2024",
+      description:
+        "Created own dataset and trained a model to detect the quality of rice. This project allowed me to understand the basics of machine learning and image classification. Yet this project is not fully completed due to time limitations.",
+      technologies: ["Python", "Roboflow", "TensorFlow"],
+      githubLink:
+        "https://github.com/LONGCELOT/Rice-Qualification-Detection.git",
       achievements: [
-        'Python',
-        'Roboflow',
-        'Members: Bin Sodina, Nhek ChanPanha, Hong PimolSaknan, Mona Ameliazzaman, VANN Seavlong (Me)'
-      ]
+        "Python",
+        "Roboflow",
+        "Members: Bin Sodina, Nhek ChanPanha, Hong PimolSaknan, Mona Ameliazzaman, VANN Seavlong (Me)",
+      ],
     },
     {
-      title: 'BAW Project at Khmer Enterprise (KE)',
-      duration: 'June 2023 - July 2023',
-      description: 'Developed a sample website for the BAW project at Khmer Enterprise, related to Digital Education platform which allow student to access the video solution to each exercise from text book base with QR code.',
-      technologies: ['html', 'css', 'javascript'],
-      githubLink: 'https://github.com/LONGCELOT/My-Final-BAW.git',
-      liveLink: 'https://longcelot.github.io/My-Final-BAW/',
+      title: "BAW Project at Khmer Enterprise (KE)",
+      duration: "June 2023 - July 2023",
+      description:
+        "Developed a sample website for the BAW project at Khmer Enterprise, related to Digital Education platform which allow student to access the video solution to each exercise from text book base with QR code.",
+      technologies: ["html", "css", "javascript"],
+      githubLink: "https://github.com/LONGCELOT/My-Final-BAW.git",
+      liveLink: "https://longcelot.github.io/My-Final-BAW/",
       achievements: [
-        'Won a first round award in top 8',
-        'Team Collaboration with 5 members',
-        'Certified by Khmer Enterprise'
-      ]
+        "Won a first round award in top 8",
+        "Team Collaboration with 5 members",
+        "Certified by Khmer Enterprise",
+      ],
     },
     {
-      title: 'Flappy Bird Game Clone',
-      duration: 'April 2023 - June 2023',
-      description: 'Learn how to build a Flappy Bird game clone using Python and Pygame. This project allow me to understand some basic game development using Pygame.',
-      technologies: ['Python', 'Pygame'],
-      githubLink: 'https://github.com/LONGCELOT/FlappyBird.git',
+      title: "Flappy Bird Game Clone",
+      duration: "April 2023 - June 2023",
+      description:
+        "Learn how to build a Flappy Bird game clone using Python and Pygame. This project allow me to understand some basic game development using Pygame.",
+      technologies: ["Python", "Pygame"],
+      githubLink: "https://github.com/LONGCELOT/FlappyBird.git",
       achievements: [
-        'Implemented a good graphics and sound effects from open-source resources',
-        'The game display the score live and has a game over screen',
-        'Members: VANN Seavlong (Me), Chea LivChea'
-      ]
-    }
-  ]
+        "Implemented a good graphics and sound effects from open-source resources",
+        "The game display the score live and has a game over screen",
+        "Members: VANN Seavlong (Me), Chea LivChea",
+      ],
+    },
+  ];
 
   const internshipExperiences = [
     {
-      title: 'bEasy: Cleaning & Pest Landing Page',
-      company: 'Suntel technology Cambodia',
-      duration: 'Present',
-      description: 'A landing page for bEasy, a cleaning and pest control service company in Cambodia. The website is built using React.js, JavaScript, and CSS, and is designed to be responsive and user-friendly.',
-      technologies: ['React', 'JavaScript', 'CSS', 'Firebase'],
-      liveLink: 'https://beasy.info/en',
+      title: "bEasy: Cleaning & Pest Landing Page",
+      company: "Suntel technology Cambodia",
+      duration: "Present",
+      description:
+        "A landing page for bEasy, a cleaning and pest control service company in Cambodia. The website is built using React.js, JavaScript, and CSS, then refactor to Next.js with shadcn for SEO friendly and it is designed to be responsive and user-friendly.",
+      technologies: [
+        "React",
+        "JavaScript",
+        "CSS",
+        "Firebase",
+        "Next.js",
+        "shadcn",
+        "GA4",
+      ],
+      liveLink: "https://beasy.info/en",
       achievements: [
-        'Implemented responsive design for mobile and desktop',
-        'Integrated Firebase for user performanc and event tracking',
-        'Work as a Frontend Intern contributing to the development of the landing page'
-      ]
+        "Implemented responsive design for mobile and desktop + fully translated in Khmer, English and Chinese",
+        "Integrated Firebase for user performanc and event tracking",
+        "Work as a Frontend Intern contributing to some part of the website while learning from senior developers",
+        "Get some real working experience in a software company environment",
+        "Contributed with some other projects as assigned",
+      ],
     },
     {
-      title: 'ISI Intern in Marketing Department',
-      company: 'ISI Group: Innovation, Striving, Integrity, and Growing together (ISIG)',
-      duration: 'January 2024',
-      description: 'Assisted in the categories the POSM materials, and develop a digital catalog for ISI products',
-      technologies: ['HTML', 'CSS', 'JavaScript'],
-      liveLink: 'https://catalogue.isisteel.com.kh/',
-      achievements: [
-        'New Experience as first time internship experience',
-      ]
-    }
-  ]
+      title: "ISI Intern in Marketing Department",
+      company:
+        "ISI Group: Innovation, Striving, Integrity, and Growing together (ISIG)",
+      duration: "January 2024",
+      description:
+        "Assisted in the categories the POSM materials, and develop a digital catalog for ISI products",
+      technologies: ["HTML", "CSS", "JavaScript"],
+      liveLink: "https://catalogue.isisteel.com.kh/",
+      achievements: ["New Experience as first time internship experience"],
+    },
+  ];
 
   const renderProjectCard = (project: any, index: number) => (
     <motion.div
@@ -145,12 +169,12 @@ const Experience = () => {
         </span>
       </div>
 
-      <p className="text-gray-600 mb-4">
-        {project.description}
-      </p>
+      <p className="text-gray-600 mb-4">{project.description}</p>
 
       <div className="mb-4">
-        <h5 className="text-sm font-semibold text-gray-900 mb-2">Technologies:</h5>
+        <h5 className="text-sm font-semibold text-gray-900 mb-2">
+          Technologies:
+        </h5>
         <div className="flex flex-wrap gap-2">
           {project.technologies.map((tech: string, techIndex: number) => (
             <span
@@ -164,16 +188,31 @@ const Experience = () => {
       </div>
 
       <div className="mb-4">
-        <h5 className="text-sm font-semibold text-gray-900 mb-2">Key Achievements:</h5>
+        <h5 className="text-sm font-semibold text-gray-900 mb-2">
+          Key Achievements:
+        </h5>
         <ul className="space-y-1">
-          {project.achievements.map((achievement: string, achievementIndex: number) => (
-            <li key={achievementIndex} className="text-sm text-gray-600 flex items-start">
-              <svg className="w-3 h-3 text-primary mr-2 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              {achievement}
-            </li>
-          ))}
+          {project.achievements.map(
+            (achievement: string, achievementIndex: number) => (
+              <li
+                key={achievementIndex}
+                className="text-sm text-gray-600 flex items-start"
+              >
+                <svg
+                  className="w-3 h-3 text-primary mr-2 mt-1 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+                {achievement}
+              </li>
+            )
+          )}
         </ul>
       </div>
 
@@ -204,7 +243,7 @@ const Experience = () => {
         </div>
       )}
     </motion.div>
-  )
+  );
 
   return (
     <section id="experience" className="section-padding bg-gray-50">
@@ -228,21 +267,21 @@ const Experience = () => {
         <div className="flex justify-center mb-12">
           <div className="bg-white rounded-lg p-1 shadow-md">
             <button
-              onClick={() => setActiveTab('projects')}
+              onClick={() => setActiveTab("projects")}
               className={`px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
-                activeTab === 'projects'
-                  ? 'bg-primary text-white'
-                  : 'text-gray-600 hover:text-primary'
+                activeTab === "projects"
+                  ? "bg-primary text-white"
+                  : "text-gray-600 hover:text-primary"
               }`}
             >
               School Projects
             </button>
             <button
-              onClick={() => setActiveTab('internships')}
+              onClick={() => setActiveTab("internships")}
               className={`px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
-                activeTab === 'internships'
-                  ? 'bg-primary text-white'
-                  : 'text-gray-600 hover:text-primary'
+                activeTab === "internships"
+                  ? "bg-primary text-white"
+                  : "text-gray-600 hover:text-primary"
               }`}
             >
               Internships
@@ -252,11 +291,12 @@ const Experience = () => {
 
         {/* Tab Content */}
         <div className="space-y-8">
-          {activeTab === 'projects' && (
+          {activeTab === "projects" && (
             <>
-              {(showAllProjects ? schoolProjects : schoolProjects.slice(0, 3)).map((project, index) => 
-                renderProjectCard(project, index)
-              )}
+              {(showAllProjects
+                ? schoolProjects
+                : schoolProjects.slice(0, 3)
+              ).map((project, index) => renderProjectCard(project, index))}
               {schoolProjects.length > 3 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -268,15 +308,20 @@ const Experience = () => {
                     onClick={() => setShowAllProjects(!showAllProjects)}
                     className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
                   >
-                    {showAllProjects ? 'Show Less' : `Show More (${schoolProjects.length - 3} more)`}
+                    {showAllProjects
+                      ? "Show Less"
+                      : `Show More (${schoolProjects.length - 3} more)`}
                   </button>
                 </motion.div>
               )}
             </>
           )}
-          {activeTab === 'internships' && (
+          {activeTab === "internships" && (
             <>
-              {(showAllInternships ? internshipExperiences : internshipExperiences.slice(0, 3)).map((experience, index) => 
+              {(showAllInternships
+                ? internshipExperiences
+                : internshipExperiences.slice(0, 3)
+              ).map((experience, index) =>
                 renderProjectCard(experience, index)
               )}
               {internshipExperiences.length > 3 && (
@@ -290,7 +335,9 @@ const Experience = () => {
                     onClick={() => setShowAllInternships(!showAllInternships)}
                     className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
                   >
-                    {showAllInternships ? 'Show Less' : `Show More (${internshipExperiences.length - 3} more)`}
+                    {showAllInternships
+                      ? "Show Less"
+                      : `Show More (${internshipExperiences.length - 3} more)`}
                   </button>
                 </motion.div>
               )}
@@ -299,7 +346,7 @@ const Experience = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Experience
+export default Experience;
