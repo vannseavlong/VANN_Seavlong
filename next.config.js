@@ -9,11 +9,6 @@ const nextConfig = {
       },
     ],
   },
-  eslint: {
-    // Temporarily ignore ESLint errors during production builds so the build can succeed.
-    // Investigate and re-enable once ESLint/Next.js versions are reconciled.
-    ignoreDuringBuilds: true,
-  },
 };
 
 module.exports = nextConfig;
