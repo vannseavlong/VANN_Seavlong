@@ -64,6 +64,11 @@ A modern, responsive portfolio website built with Next.js, TypeScript, and Tailw
 
 ## Customization
 
+### Telegram bot (Contact form)
+
+This project now sends contact form submissions via a server-side Next.js API route. To enable it, create a `.env.local` file at the project root (do not commit it) and set your Telegram bot credentials. See `.env.local.example` for the required variables.
+
+
 ### Personal Information
 
 Update the following files with your personal information:
