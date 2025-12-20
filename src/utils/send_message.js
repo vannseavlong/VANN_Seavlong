@@ -8,51 +8,27 @@
  * @returns {Promise<boolean>} - Success status
  */
 export const sendToTelegram = async (formData) => {
-  // Replace these with your actual bot token and chat ID
-  const BOT_TOKEN = '7183671317:AAF360Z00zQcZ9-pKdAzD4hfBL8pQMuJ9aQ';
-  const CHAT_ID = '-1002959354394';
-  
-  const telegramAPI = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-  
-  // Format the message for Telegram
-  const message = `
-🌟 *New Contact Form Submission* 🌟
-
-👤 *Name:* ${formData.name}
-📧 *Email:* ${formData.email}
-📝 *Subject:* ${formData.subject}
-
-💬 *Message:*
-${formData.message}
-
----
-📅 *Received:* ${new Date().toLocaleString()}
-  `.trim();
-
+  // Send form data to the server API route which keeps the bot token secret
   try {
-    const response = await fetch(telegramAPI, {
-      method: 'POST',
+    const response = await fetch("/api/contact", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message,
-        parse_mode: 'Markdown'
-      })
+      body: JSON.stringify(formData),
     });
 
     const result = await response.json();
-    
+
     if (response.ok && result.ok) {
-      console.log('Message sent to Telegram successfully');
+      console.log("Message sent to Telegram via server API successfully");
       return true;
     } else {
-      console.error('Telegram API Error:', result);
+      console.error("Server API Error:", result);
       return false;
     }
   } catch (error) {
-    console.error('Error sending message to Telegram:', error);
+    console.error("Error sending message to server API:", error);
     return false;
   }
 };
@@ -63,47 +39,27 @@ ${formData.message}
  * @returns {Promise<boolean>} - Success status
  */
 export const sendToTelegramPlain = async (formData) => {
-  const BOT_TOKEN = '7183671317:AAF360Z00zQcZ9-pKdAzD4hfBL8pQMuJ9aQ';
-  const CHAT_ID = '-1002959354394';
-
-  const telegramAPI = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-  
-  const message = `
-New Contact Form Submission
-
-Name: ${formData.name}
-Email: ${formData.email}
-Subject: ${formData.subject}
-
-Message:
-${formData.message}
-
-Received: ${new Date().toLocaleString()}
-  `.trim();
-
+  // Plain variant uses server API as well
   try {
-    const response = await fetch(telegramAPI, {
-      method: 'POST',
+    const response = await fetch("/api/contact", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message
-      })
+      body: JSON.stringify({ ...formData, plain: true }),
     });
 
     const result = await response.json();
-    
+
     if (response.ok && result.ok) {
-      console.log('Message sent to Telegram successfully');
+      console.log("Plain message sent via server API successfully");
       return true;
     } else {
-      console.error('Telegram API Error:', result);
+      console.error("Server API Error:", result);
       return false;
     }
   } catch (error) {
-    console.error('Error sending message to Telegram:', error);
+    console.error("Error sending plain message to server API:", error);
     return false;
   }
 };
