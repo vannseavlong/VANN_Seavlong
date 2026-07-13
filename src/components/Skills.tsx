@@ -1,5 +1,6 @@
-import {} from "react";
+import { CSSProperties } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   FaReact,
   FaNodeJs,
@@ -16,6 +17,7 @@ import {
   SiExpress,
   SiMongodb,
   SiMysql,
+  SiPostgresql,
   SiTailwindcss,
   SiPostman,
   SiVisualstudiocode,
@@ -30,7 +32,21 @@ import {
   SiFastapi,
   SiPython,
   SiGooglecloud,
+  SiNpm,
+  SiFlutter,
 } from "react-icons/si";
+
+const LsdbIcon = (_props: { className?: string; style?: CSSProperties }) => (
+  <div className="w-16 h-16 mb-3 flex items-center justify-center rounded-full bg-blue-100">
+    <Image
+      src="/images/lsdb.svg"
+      alt="lsdb"
+      width={48}
+      height={48}
+      className="w-11 h-11 object-contain"
+    />
+  </div>
+);
 
 const Skills = () => {
   const skillCategories = [
@@ -45,6 +61,7 @@ const Skills = () => {
         { name: "CSS3", icon: FaCss3Alt, color: "#1572B6" },
         { name: "Tailwind CSS", icon: SiTailwindcss, color: "#06B6D4" },
         { name: "Shadcn UI", icon: SiShadow, color: "#000000" },
+        { name: "Flutter", icon: SiFlutter, color: "#54C5F8" },
       ],
     },
     {
@@ -53,9 +70,11 @@ const Skills = () => {
         { name: "Node.js", icon: FaNodeJs, color: "#339933" },
         { name: "Express.js", icon: SiExpress, color: "#000000" },
         { name: "MySQL", icon: SiMysql, color: "#4479A1" },
+        { name: "PostgreSQL", icon: SiPostgresql, color: "#4169E1" },
         { name: "Database Design", icon: FaDatabase, color: "#336791" },
         { name: "FastAPI", icon: SiFastapi, color: "#009688" },
         { name: "Python", icon: SiPython, color: "#3776AB" },
+        { name: "lsdb", icon: LsdbIcon, color: "#000000" },
       ],
     },
     {
@@ -72,6 +91,7 @@ const Skills = () => {
         // { name: 'Docker', icon: SiDocker, color: '#2496ED' },
         // { name: 'DigitalOcean', icon: SiDigitalocean, color: '#007596' }
         { name: "Google Cloud", icon: SiGooglecloud, color: "#4285F4" },
+        { name: "npm", icon: SiNpm, color: "#CB3837" },
       ],
     },
   ];

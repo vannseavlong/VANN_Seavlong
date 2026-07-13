@@ -20,7 +20,6 @@ export default function Home() {
           content="VANN Seavlong - Software Engineer & Full Stack Developer Portfolio"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="min-h-screen bg-gray-50">
         <Navbar />

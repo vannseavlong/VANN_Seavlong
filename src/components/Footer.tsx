@@ -8,6 +8,7 @@ import {
   FaInstagram,
   FaEnvelope,
   FaTelegram,
+  FaDev,
 } from "react-icons/fa";
 
 const Footer = () => {
@@ -43,9 +44,15 @@ const Footer = () => {
       color: "#0088cc",
     },
     {
+      name: "dev.to",
+      icon: FaDev,
+      href: "https://dev.to/longcelot",
+      color: "white",
+    },
+    {
       name: "Email",
       icon: FaEnvelope,
-      href: "mailto:vannseavlong55@gmail.com",
+      href: "mailto:seavlongvann55@gmail.com",
       color: "#EA4335",
     },
   ];
@@ -150,12 +157,7 @@ const Footer = () => {
               <p className="text-gray-300">
                 <strong>Email:</strong>
                 <br />
-                vannseavlong55@gmail.com
-              </p>
-              <p className="text-gray-300">
-                <strong>Phone:</strong>
-                <br />
-                +855 95 229 726 / +855 97 497 6736
+                seavlongvann55@gmail.com
               </p>
               <p className="text-gray-300">
                 <strong>Location:</strong>

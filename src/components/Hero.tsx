@@ -1,29 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import CircuitBackground from "./CircuitBackground";
+
+const TITLES = [
+  "Software Engineering",
+  "Web Frontend Developer",
+  "Open Source npm package builder",
+];
 
 const Hero = () => {
-  const [currentTitle, setCurrentTitle] = useState(0);
-  const titles = [
-    "Software Engineering",
-    "Web Frontend Developer",
-    // 'Backend Express Developer',
-    // 'Full Stack Developer'
-  ];
+
+  const [displayText, setDisplayText] = useState("");
+  const [titleIndex, setTitleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTitle((prev) => (prev + 1) % titles.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [titles.length]);
+    const current = TITLES[titleIndex];
+    const typingSpeed = isDeleting ? 40 : 80;
+    const pauseAfterTyped = 1800;
+
+    if (!isDeleting && displayText === current) {
+      const pause = setTimeout(() => setIsDeleting(true), pauseAfterTyped);
+      return () => clearTimeout(pause);
+    }
+
+    if (isDeleting && displayText === "") {
+      setIsDeleting(false);
+      setTitleIndex((prev) => (prev + 1) % TITLES.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setDisplayText(
+        isDeleting
+          ? current.slice(0, displayText.length - 1)
+          : current.slice(0, displayText.length + 1)
+      );
+    }, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isDeleting, titleIndex]);
 
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100"
+      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100"
     >
-      <div className="container mx-auto px-4 py-20">
+      <CircuitBackground />
+      <div className="relative z-10 container mx-auto px-4 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text Content */}
           <motion.div
@@ -47,16 +72,10 @@ const Hero = () => {
               transition={{ delay: 0.4 }}
               className="text-2xl lg:text-3xl text-gray-700 mb-6 h-10"
             >
-              <motion.span
-                key={currentTitle}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5 }}
-                className="text-primary font-semibold"
-              >
-                {titles[currentTitle]}
-              </motion.span>
+              <span className="text-primary font-semibold">
+                {displayText}
+                <span className="animate-pulse">|</span>
+              </span>
             </motion.div>
 
             <motion.p
@@ -121,6 +140,7 @@ const Hero = () => {
                 src="/images/profile.webp"
                 alt="VANN Seavlong"
                 fill
+                sizes="320px"
                 className="object-cover"
                 priority
               />

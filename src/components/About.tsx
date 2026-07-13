@@ -39,6 +39,7 @@ const About = () => {
                 src="/images/about.webp"
                 alt="VANN Seavlong Professional Photo"
                 fill
+                sizes="(max-width: 640px) 320px, 384px"
                 className="object-cover object-center"
                 priority
               />
@@ -59,44 +60,57 @@ const About = () => {
 
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                I'm a third-year CamTech University student studying software
-                engineering. I'm currently delving deeply into frontend skill. I
-                focus on React vite using plugin UI component shadcn and
-                Tailwind CSS plus API integration. I'm also exploring backend
-                development, investigating full-stack workflows, and learning
-                how to turn ideas into functional, clean, and user-friendly
-                websites/systems.
+                I'm a frontend developer with over 1 year of experience,
+                working mainly with React and Next.js to build clean and
+                user-friendly websites. I'm also new to mobile development
+                and currently learning Flutter to expand my skill set. On
+                the backend side, I now have a better understanding of
+                building APIs and have hands-on experience with Express.js.
               </p>
 
               <p>
-                I enjoy exploring and  building website because it can help me
-                to enhance my fundamental skill related to both frontend and
-                backend. Recently, I've been working on a project using React.js
-                as a frontend and Node.js + Express.js as backend with Postman
-                API following by mysql database with sequelize. I also try to do
-                something crazy like building a full-stack website using Next.js
-                as frontend and Express.js as backend with Google Sheet haha.
-                User will login using OAuth2.0 and all of data will be stored in
-                their own Google Sheet, I will not access their data. This idea
-                comming to my mind when I think of something that I can reduce
-                cost on hosting database.This project is still in progress, it
-                will up soon I promise.
+                I enjoy building websites and portals along with the backend
+                systems that manage their content, as it helps me understand
+                both sides of a product more deeply. On the frontend, I've
+                worked on performance optimization (such as using WebP
+                images), event and traffic tracking with GA4 and Firebase
+                Analytics, responsive design, and SEO best practices. I'm
+                also familiar with security best practices like the OWASP
+                Top 10 and how to apply them in real projects. On the
+                backend, I'm more comfortable with Node.js and use
+                Express.js to build and manage server-side logic. Beyond
+                client work, I also contribute to open source by building
+                and publishing npm packages, which I'll cover in more
+                detail in the Experience section below.
+              </p>
+
+              <p>
+                Outside of coding, I like to unwind with guitar, drums, or
+                piano, and occasionally jump into a round of Mobile Legends
+                with friends. Fun fact: I once used Google Sheets as the
+                database for my own budget-tracking app, and that experience
+                led me to build{" "}
+                <code className="text-sm bg-gray-100 px-1.5 py-0.5 rounded">
+                  longcelot-sheet-db
+                </code>
+                , an npm package that makes it easier to use Google Sheets as
+                a staging table in future projects.
               </p>
 
               <p>
                 There’s still a lot of things I don’t know, but I will keep
                 going. As a Software Engineering student, I am passionate about
                 integrating new technologies into key sectors in my country. My
-                goal is to work in a software company where I can grow
-                professionally while gaining knowledge in other fields. Feel
-                free to scroll through, check out my work, and reach out if
-                anything sparks your interest.
+                goal is to join a software company where I can grow
+                professionally, gain knowledge in other fields, and give back
+                to the community. Feel free to scroll through, check out my
+                work, and reach out if anything sparks your interest.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-6 mt-8">
               <div className="text-center p-4 bg-blue-50 rounded-lg">
-                <h4 className="text-2xl font-bold text-primary">7</h4>
+                <h4 className="text-2xl font-bold text-primary">12</h4>
                 <p className="text-gray-600">School Projects Completed</p>
               </div>
               <div className="text-center p-4 bg-blue-50 rounded-lg">

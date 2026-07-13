@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa'
+import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane } from 'react-icons/fa'
 import { sendToTelegram } from '../utils/send_message'
 
 const Contact = () => {
@@ -50,14 +50,8 @@ const Contact = () => {
     {
       icon: FaEnvelope,
       label: 'Email',
-      value: 'vannseavlong55@gmail.com',
-      href: 'mailto:vannseavlong55@gmail.com'
-    },
-    {
-      icon: FaPhone,
-      label: 'Phone',
-      value: '+855 95 229 726 / +855 97 497 6736',
-      href: 'tel:+85595229726'
+      value: 'seavlongvann55@gmail.com',
+      href: 'mailto:seavlongvann55@gmail.com'
     },
     {
       icon: FaMapMarkerAlt,
