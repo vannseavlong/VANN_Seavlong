@@ -13,7 +13,9 @@ import {
   FaCarSide,
   FaPlane,
   FaRocket,
+  FaFutbol,
 } from "react-icons/fa";
+import { GiSoccerKick } from "react-icons/gi";
 
 export type TravelMode = "walk" | "bike" | "motor" | "car" | "plane" | "rocket";
 
@@ -72,6 +74,52 @@ const TravelIndicator: React.FC<{ mode: TravelMode }> = ({ mode }) => {
   );
 };
 
+// Scrolling back up doesn't reverse the walk/motor/car animations — instead a football
+// gets kicked from "Now" and flies back to the start in one continuous arc that spans the
+// whole line, ignoring individual milestone positions entirely (no bounce per segment).
+// Driven purely by scroll position (not time), so it stays correct no matter how the user
+// scrubs back and forth.
+const BallIndicator: React.FC<{
+  arcY: ReturnType<typeof useTransform<number, number>>;
+  shadowOpacity: ReturnType<typeof useTransform<number, number>>;
+  shadowScale: ReturnType<typeof useTransform<number, number>>;
+}> = ({ arcY, shadowOpacity, shadowScale }) => (
+  <span className="relative inline-flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6">
+    <motion.span
+      style={{ opacity: shadowOpacity, scale: shadowScale }}
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 w-3 h-1.5 rounded-full bg-black/40 blur-[1px]"
+    />
+    <motion.div style={{ y: arcY }} className="relative z-10">
+      <span className="inline-block ball-spin">
+        <FaFutbol className="w-4 h-4 sm:w-5 sm:h-5 text-gray-800" />
+      </span>
+    </motion.div>
+  </span>
+);
+
+// One-shot flourish: a leg winds up, kicks, and follows through, played once each time
+// reversing starts. Mirrored (scaleX: -1) because the source art faces right by default,
+// but the ball travels left (toward "2021") — left unmirrored it looked like it was
+// kicking the ball the wrong way. The scaleX lives in framer's own `animate`/`initial`
+// (not a Tailwind class) alongside the other transform keyframes so nothing clobbers it.
+const KickFlourish: React.FC = () => (
+  <motion.div
+    initial={{ opacity: 0, x: 6, y: 4, rotate: -18, scaleX: -1 }}
+    animate={{
+      opacity: [0, 1, 1, 1, 1, 0],
+      x: [6, 3, -8, -18, -22, -24],
+      y: [4, 3, -3, 1, 3, 4],
+      rotate: [-18, -28, 22, -6, 2, 0],
+      scaleX: -1,
+    }}
+    transition={{ duration: 1.3, times: [0, 0.2, 0.38, 0.6, 0.82, 1], ease: "easeInOut" }}
+    className="absolute top-1/2 -translate-y-1/2 z-30 drop-shadow-sm"
+    style={{ left: "100%" }}
+  >
+    <GiSoccerKick className="w-7 h-7 sm:w-8 sm:h-8 text-gray-700" />
+  </motion.div>
+);
+
 const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
   milestones,
   startLabel = "2021",
@@ -87,6 +135,12 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
     milestones[0]?.indicator ?? "walk"
   );
   const [showIndicator, setShowIndicator] = useState(false);
+  // scrolling up feels like "walking backward through life", so that direction gets its
+  // own kicked-football treatment instead of the forward walk/motor/car indicators, and
+  // milestone cards are suppressed entirely while reversing.
+  const [isReverse, setIsReverse] = useState(false);
+  const directionRef = useRef<"up" | "down">("down");
+  const prevProgressRef = useRef(0);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -107,7 +161,24 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
     return Math.min(...gaps) * 0.2;
   }, [nodePositions]);
 
+  // One continuous arc across the entire 0-1 line — a single kick from "Now" (v=1) that
+  // lands at "2021" (v=0) — instead of a hop per segment. Milestone positions play no part.
+  const ballArcHeight = 80;
+  const ballY = useTransform(scrollYProgress, (v) => -Math.sin(v * Math.PI) * ballArcHeight);
+  const ballShadowOpacity = useTransform(scrollYProgress, (v) => 0.35 - 0.22 * Math.sin(v * Math.PI));
+  const ballShadowScale = useTransform(scrollYProgress, (v) => 1 - 0.5 * Math.sin(v * Math.PI));
+
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const prev = prevProgressRef.current;
+    if (latest !== prev) {
+      const dir = latest > prev ? "down" : "up";
+      if (dir !== directionRef.current) {
+        directionRef.current = dir;
+        setIsReverse(dir === "up");
+      }
+    }
+    prevProgressRef.current = latest;
+
     // exact "passed" index — no early snap, stays in lockstep with the blue fill line
     let passed = -1;
     for (let i = 0; i < milestones.length; i++) {
@@ -139,10 +210,15 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
       }
     });
 
-    const arrived = nearestDist <= arrivalEpsilon;
+    // Forward: pause right at each node (existing per-milestone arrival). Reverse: the ball
+    // ignores interior milestone nodes entirely and only pauses at the two line endpoints.
+    const arrived =
+      directionRef.current === "down"
+        ? nearestDist <= arrivalEpsilon
+        : latest <= arrivalEpsilon || latest >= 1 - arrivalEpsilon;
     setShowIndicator(!arrived);
 
-    if (arrived) {
+    if (arrived && directionRef.current === "down") {
       // node k (1..n) maps to milestone k-1; node 0 (start) and node n+1 (end) aren't milestones
       const milestoneIdx = nearestK - 1;
       setCurrentIndex(milestoneIdx >= 0 && milestoneIdx < milestones.length ? milestoneIdx : -1);
@@ -228,6 +304,18 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
         .speed-dash-3 {
           animation-delay: 0.3s;
         }
+
+        @keyframes ballSpin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .ball-spin {
+          animation: ballSpin 0.5s linear infinite;
+        }
       `}</style>
 
       <div className="sticky top-1/2 -translate-y-1/2 flex items-center justify-center">
@@ -294,7 +382,7 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
                       (not the motion.div below) because framer-motion writes its own inline
                       `transform` for the scale animation, which would otherwise silently
                       replace the Tailwind translate-x-1/2 and knock the icon off-center. */}
-                  <div className="absolute -translate-x-1/2 bottom-1.5 z-10">
+                  <div className="absolute -translate-x-1/2 bottom-2.5 sm:bottom-3.5 z-10">
                     <motion.div
                       initial={false}
                       animate={{
@@ -303,9 +391,9 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
                       }}
                       transition={{ duration: 0.2 }}
                       style={{ pointerEvents: isCurrent ? "auto" : "none" }}
-                      className="w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-accent text-white flex items-center justify-center shadow-md"
+                      className="text-primary flex items-center justify-center"
                     >
-                      <Icon className="w-3 h-3 sm:w-4.5 sm:h-4.5" />
+                      <Icon className="w-7 h-7 sm:w-10 sm:h-10 drop-shadow-md" />
                     </motion.div>
                   </div>
 
@@ -335,8 +423,15 @@ const MilestoneTimeline: React.FC<MilestoneTimelineProps> = ({
               transition={{ duration: 0.15 }}
               className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 z-20"
             >
-              <TravelIndicator mode={segmentMode} />
+              {isReverse ? (
+                <BallIndicator arcY={ballY} shadowOpacity={ballShadowOpacity} shadowScale={ballShadowScale} />
+              ) : (
+                <TravelIndicator mode={segmentMode} />
+              )}
             </motion.div>
+
+            {/* kick-off flourish, played once each time reversing starts, from "Now" */}
+            {isReverse && <KickFlourish />}
           </div>
         </div>
       </div>

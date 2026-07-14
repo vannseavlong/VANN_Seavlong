@@ -3,37 +3,34 @@ import { motion } from "framer-motion";
 import {
   FaGithub,
   FaExternalLinkAlt,
-  FaSchool,
-  FaBuilding,
-  FaLaptopCode,
-  FaRocket,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 import MilestoneTimeline, { Milestone } from "./MilestoneTimeline";
 
 const journeyMilestones: Milestone[] = [
   {
-    icon: FaSchool,
+    icon: FaMapMarkerAlt,
     label: "2022",
     description: "Go to CamTech University",
     indicator: "walk",
   },
   {
-    icon: FaBuilding,
+    icon: FaMapMarkerAlt,
     label: "2024",
-    description: "Marketing Intern at ISI Group",
+    description: "Short Intern at ISI Group",
     indicator: "motor",
   },
   {
-    icon: FaLaptopCode,
-    label: "2024 - Present",
-    description: "Frontend Intern at Suntel Technology",
+    icon: FaMapMarkerAlt,
+    label: "July 2025",
+    description: "Frontend Intern part-time at Suntel Technology",
     indicator: "car",
   },
   {
-    icon: FaRocket,
-    label: "Present",
-    description: "Building & learning as a developer",
-    indicator: "bike",
+    icon: FaMapMarkerAlt,
+    label: "January 2026 - Now",
+    description: "Junior Frontend Developer at Suntel Technology",
+    indicator: "plane",
   },
 ];
 
