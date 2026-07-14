@@ -20,9 +20,12 @@ body {
   color: #1F2937;
 }
 
-/* Prevent horizontal overflow on small / responsive screens */
+/* Prevent horizontal overflow on small / responsive screens.
+   Uses `clip` instead of `hidden` because `hidden` forces overflow-y to
+   `auto`, which turns body into a scroll container and breaks
+   `position: sticky` for any descendant (e.g. the milestone timeline). */
 html, body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .section-padding {

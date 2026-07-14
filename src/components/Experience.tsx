@@ -1,6 +1,41 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
+import {
+  FaGithub,
+  FaExternalLinkAlt,
+  FaSchool,
+  FaBuilding,
+  FaLaptopCode,
+  FaRocket,
+} from "react-icons/fa";
+import MilestoneTimeline, { Milestone } from "./MilestoneTimeline";
+
+const journeyMilestones: Milestone[] = [
+  {
+    icon: FaSchool,
+    label: "2022",
+    description: "Go to CamTech University",
+    indicator: "walk",
+  },
+  {
+    icon: FaBuilding,
+    label: "2024",
+    description: "Marketing Intern at ISI Group",
+    indicator: "motor",
+  },
+  {
+    icon: FaLaptopCode,
+    label: "2024 - Present",
+    description: "Frontend Intern at Suntel Technology",
+    indicator: "car",
+  },
+  {
+    icon: FaRocket,
+    label: "Present",
+    description: "Building & learning as a developer",
+    indicator: "bike",
+  },
+];
 
 const Experience = () => {
   const [activeTab, setActiveTab] = useState("projects");
@@ -343,6 +378,10 @@ const Experience = () => {
               )}
             </>
           )}
+        </div>
+
+        <div className="mt-16 sm:mt-24">
+          <MilestoneTimeline milestones={journeyMilestones} startLabel="2021" endLabel="Now" />
         </div>
       </div>
     </section>

@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(./node_modules/.bin/tsc --noEmit -p .)",
+      "Bash(node debug_align2.mjs)"
+    ]
+  }
+}
