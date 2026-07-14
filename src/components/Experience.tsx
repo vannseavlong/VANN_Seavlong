@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import {
   FaGithub,
   FaExternalLinkAlt,
   FaMapMarkerAlt,
+  FaArrowRight,
 } from "react-icons/fa";
 import MilestoneTimeline, { Milestone } from "./MilestoneTimeline";
+import {
+  ProjectItem,
+  schoolProjects,
+  internshipExperiences,
+} from "../data/projects";
 
 const journeyMilestones: Milestone[] = [
   {
@@ -39,144 +46,7 @@ const Experience = () => {
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showAllInternships, setShowAllInternships] = useState(false);
 
-  const schoolProjects = [
-    {
-      title: "Air Quality Monitoring System",
-      duration: "June 2025 - August 2025",
-      description:
-        "Learn to create an air quality monitoring system using Flutter, FastAPI, connected to Open-meteo live sensor data.",
-      technologies: [
-        "Flutter",
-        "FastAPI",
-        "open-meteo",
-        "XGBOOST model selection",
-      ],
-      githubLink: "https://github.com/LONGCELOT/Air_Quality_Prediction/",
-      achievements: [
-        "Integrate everything together",
-        "Prediction accuracy improvement",
-        "Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong Pimolsaknan, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "Quiz App",
-      duration: "June 2025 - August 2025",
-      description:
-        "Learn to create a quiz app using Flutter and provided API integration",
-      technologies: ["Flutter", "API integration"],
-      githubLink: "https://github.com/LONGCELOT/quizApp/",
-      achievements: [
-        "Integrate everything together",
-        "Prediction accuracy improvement",
-        "Members: VANN Seavlong",
-      ],
-    },
-    {
-      title: "Movie Booking Ticket System",
-      duration: "January 2025 - May 2025",
-      description:
-        "Learn to create a movie booking ticket system using React vite, express, connected to a share database server on Heidy SQL.",
-      technologies: ["React.js", "Express.js", "MySQL", "Heidy SQL"],
-      achievements: [
-        "Learn MySQL queries",
-        "OOP Concepts unlock",
-        "Members: Bin Sodina, Nhek ChanPanha, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "Academic Record System Database + Figma UI",
-      duration: "July 2024 - August 2024",
-      description:
-        "Learn to design a database schema with relationship, ER-Diagram and create a user-friendly UX/UI interface for managing academic records.",
-      technologies: ["MySQL", "Figma", "Mamp server Php my admin"],
-      achievements: [
-        "Learn MySQL queries",
-        "OOP Concepts unlock",
-        "Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong PimolSaknan, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "Rice Quality Detection System",
-      duration: "July 2024 - August 2024",
-      description:
-        "Created own dataset and trained a model to detect the quality of rice. This project allowed me to understand the basics of machine learning and image classification. Yet this project is not fully completed due to time limitations.",
-      technologies: ["Python", "Roboflow", "TensorFlow"],
-      githubLink:
-        "https://github.com/LONGCELOT/Rice-Qualification-Detection.git",
-      achievements: [
-        "Python",
-        "Roboflow",
-        "Members: Bin Sodina, Nhek ChanPanha, Hong PimolSaknan, Mona Ameliazzaman, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "BAW Project at Khmer Enterprise (KE)",
-      duration: "June 2023 - July 2023",
-      description:
-        "Developed a sample website for the BAW project at Khmer Enterprise, related to Digital Education platform which allow student to access the video solution to each exercise from text book base with QR code.",
-      technologies: ["html", "css", "javascript"],
-      githubLink: "https://github.com/LONGCELOT/My-Final-BAW.git",
-      liveLink: "https://longcelot.github.io/My-Final-BAW/",
-      achievements: [
-        "Won a first round award in top 8",
-        "Team Collaboration with 5 members",
-        "Certified by Khmer Enterprise",
-      ],
-    },
-    {
-      title: "Flappy Bird Game Clone",
-      duration: "April 2023 - June 2023",
-      description:
-        "Learn how to build a Flappy Bird game clone using Python and Pygame. This project allow me to understand some basic game development using Pygame.",
-      technologies: ["Python", "Pygame"],
-      githubLink: "https://github.com/LONGCELOT/FlappyBird.git",
-      achievements: [
-        "Implemented a good graphics and sound effects from open-source resources",
-        "The game display the score live and has a game over screen",
-        "Members: VANN Seavlong (Me), Chea LivChea",
-      ],
-    },
-  ];
-
-  const internshipExperiences = [
-    {
-      title: "bEasy: Cleaning & Pest Landing Page",
-      company: "Suntel technology Cambodia",
-      duration: "Present",
-      description:
-        "A landing page for bEasy, a cleaning and pest control service company in Cambodia. The website is built using React.js, JavaScript, and CSS, then refactor to Next.js with shadcn for SEO friendly and it is designed to be responsive and user-friendly.",
-      technologies: [
-        "React",
-        "JavaScript",
-        "CSS",
-        "Firebase",
-        "Next.js",
-        "shadcn",
-        "GA4",
-      ],
-      liveLink: "https://beasy.info/en",
-      achievements: [
-        "Implemented responsive design for mobile and desktop + fully translated in Khmer, English and Chinese",
-        "Integrated Firebase for user performanc and event tracking",
-        "Work as a Frontend Intern contributing to some part of the website while learning from senior developers",
-        "Get some real working experience in a software company environment",
-        "Contributed with some other projects as assigned",
-      ],
-    },
-    {
-      title: "ISI Intern in Marketing Department",
-      company:
-        "ISI Group: Innovation, Striving, Integrity, and Growing together (ISIG)",
-      duration: "January 2024",
-      description:
-        "Assisted in the categories the POSM materials, and develop a digital catalog for ISI products",
-      technologies: ["HTML", "CSS", "JavaScript"],
-      liveLink: "https://catalogue.isisteel.com.kh/",
-      achievements: ["New Experience as first time internship experience"],
-    },
-  ];
-
-  const renderProjectCard = (project: any, index: number) => (
+  const renderProjectCard = (project: ProjectItem, index: number) => (
     <motion.div
       key={project.title}
       initial={{ opacity: 0, y: 50 }}
@@ -248,32 +118,39 @@ const Experience = () => {
         </ul>
       </div>
 
-      {(project.githubLink || project.liveLink) && (
-        <div className="flex gap-4">
-          {project.githubLink && (
-            <a
-              href={project.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-            >
-              <FaGithub className="w-4 h-4 mr-2" />
-              GitHub
-            </a>
-          )}
-          {project.liveLink && (
-            <a
-              href={project.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-            >
-              <FaExternalLinkAlt className="w-4 h-4 mr-2" />
-              Live Demo
-            </a>
-          )}
-        </div>
-      )}
+      <div className="flex flex-wrap items-center gap-4">
+        {project.githubLink && (
+          <a
+            href={project.githubLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+          >
+            <FaGithub className="w-4 h-4 mr-2" />
+            GitHub
+          </a>
+        )}
+        {project.liveLink && (
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+          >
+            <FaExternalLinkAlt className="w-4 h-4 mr-2" />
+            Live Demo
+          </a>
+        )}
+        <Link
+          href={`/projects/${project.slug}`}
+          className="flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300 ml-auto"
+        >
+          View Details
+          <FaArrowRight className="w-3 h-3 ml-2" />
+        </Link>
+      </div>
     </motion.div>
   );
 

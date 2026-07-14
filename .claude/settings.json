@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(./node_modules/.bin/tsc --noEmit -p .)",
-      "Bash(node debug_align2.mjs)"
+      "Bash(node debug_align2.mjs)",
+      "Bash(npx next *)",
+      "Bash(curl -s http://localhost:3000/projects/quiz-app)",
+      "Bash(curl -s http://localhost:3000/projects/beasy-cleaning-pest-landing-page)"
     ]
   }
 }
