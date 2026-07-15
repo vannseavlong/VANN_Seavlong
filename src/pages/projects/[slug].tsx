@@ -9,6 +9,8 @@ import {
   FaMobileAlt,
   FaDownload,
   FaChevronLeft,
+  FaBook,
+  FaNpm,
 } from "react-icons/fa";
 import { allProjects, hasDetailPage, ProjectItem } from "../../data/projects";
 import Navbar from "../../components/Navbar";
@@ -149,6 +151,28 @@ export default function ProjectPage({ project }: ProjectPageProps) {
                 >
                   <FaDownload className="w-4 h-4 mr-2" />
                   Download APK
+                </a>
+              )}
+              {project.docsLink && (
+                <a
+                  href={project.docsLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary px-6 py-2 rounded-full font-medium inline-flex items-center hover:transform hover:scale-105 transition-all duration-300"
+                >
+                  <FaBook className="w-4 h-4 mr-2" />
+                  Documentation
+                </a>
+              )}
+              {project.npmLink && (
+                <a
+                  href={project.npmLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+                >
+                  <FaNpm className="w-5 h-5 mr-2" />
+                  npm Package
                 </a>
               )}
             </div>

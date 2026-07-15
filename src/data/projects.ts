@@ -1,4 +1,4 @@
-export type ProjectMediaType = "app" | "web";
+export type ProjectMediaType = "app" | "web" | "open-source";
 
 export interface ProjectItem {
   slug: string;
@@ -12,12 +12,18 @@ export interface ProjectItem {
   /** Use instead of githubLink when a project has more than one repo (e.g. app + backend) */
   repositories?: { label: string; url: string }[];
   liveLink?: string;
-  /** "app" -> detail page shows a screenshot gallery, "web" -> detail page links out to liveLink */
+  /** "app" -> detail page shows a screenshot gallery, "web" -> detail page links out to liveLink, "open-source" -> links out to docs/npm */
   mediaType: ProjectMediaType;
   /** Screenshot paths under /public, only used when mediaType === "app" */
   screenshots?: string[];
   /** Path/URL to a downloadable .apk, only used when mediaType === "app" */
   apkLink?: string;
+  /** Hosted documentation site, mainly used when mediaType === "open-source" */
+  docsLink?: string;
+  /** npm registry page, mainly used when mediaType === "open-source" */
+  npmLink?: string;
+  /** OG image for docsLink, rendered as a link-preview card on the project card instead of Key Achievements */
+  docsPreviewImage?: string;
   /** Set to false to skip generating a /projects/[slug] page and hide "View Details". Defaults to true. */
   hasDetailPage?: boolean;
 }
@@ -63,6 +69,38 @@ export const ownProjects: ProjectItem[] = [
       "/project/paw/Logout.jpg",
     ],
     apkLink: "/downloads/paw.apk",
+  },
+  {
+    slug: "longcelot-sheet-db",
+    title: "longcelot-sheet-db",
+    duration: "2026",
+    description:
+      "A schema-first, actor-aware database adapter for Node.js that uses Google Sheets as the storage engine, built for MVPs, prototypes, and staging environments where running a real database is not worth the cost.",
+    technologies: [
+      "TypeScript",
+      "Node.js",
+      "Google Sheets API",
+      "Google OAuth",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "MySQL",
+      "Commander",
+      "Inquirer",
+    ],
+    achievements: [
+      "Designed a schema-first TypeScript DSL that compiles table definitions into live Google Sheets, with full CRUD (create, createMany, findMany, findOne, count, update, upsert, delete)",
+      "Built actor-based data isolation so each user role owns its own sheet, with cross-actor access blocked and permissions enforced automatically",
+      "Shipped a CLI (init, generate, sync, validate, seed, migrate, drop and rename schema elements, mock-users) with CI-friendly non-interactive flags",
+      "Added hash-based schema version tracking that detects stale user sheets at runtime, with warn, error, and auto-sync recovery modes",
+      "Built a shared adapter contract so Postgres, MySQL, and Prisma can be swapped in for the Sheets backend without rewriting any CRUD calls",
+      "Published the package to npm with automated CI, versioned releases, and a hosted documentation site",
+    ],
+    githubLink: "https://github.com/vannseavlong/longcelot-sheet-staging",
+    mediaType: "open-source",
+    docsLink: "https://longcelot-sheet-db.web.app/",
+    npmLink: "https://www.npmjs.com/package/longcelot-sheet-db",
+    docsPreviewImage: "/project/longcelot-sheet-db/og-image.png",
   },
 ];
 

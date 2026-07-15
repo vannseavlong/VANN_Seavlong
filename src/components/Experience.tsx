@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import {
   FaGithub,
   FaExternalLinkAlt,
   FaMapMarkerAlt,
   FaArrowRight,
+  FaBook,
+  FaNpm,
 } from "react-icons/fa";
 import MilestoneTimeline, { Milestone } from "./MilestoneTimeline";
 import {
@@ -92,34 +95,71 @@ const Experience = () => {
         </div>
       </div>
 
-      <div className="mb-4">
-        <h5 className="text-sm font-semibold text-gray-900 mb-2">
-          Key Achievements:
-        </h5>
-        <ul className="space-y-1">
-          {project.achievements.map(
-            (achievement: string, achievementIndex: number) => (
-              <li
-                key={achievementIndex}
-                className="text-sm text-gray-600 flex items-start"
-              >
-                <svg
-                  className="w-3 h-3 text-primary mr-2 mt-1 flex-shrink-0"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+      {project.mediaType === "open-source" &&
+      project.docsLink &&
+      project.docsPreviewImage ? (
+        <div className="mb-4">
+          <h5 className="text-sm font-semibold text-gray-900 mb-2">
+            Docs Preview:
+          </h5>
+          <a
+            href={project.docsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="block rounded-lg overflow-hidden border border-gray-200 hover:border-primary transition-colors duration-300"
+          >
+            <div className="relative w-full aspect-[1200/630] bg-gray-900">
+              <Image
+                src={project.docsPreviewImage}
+                alt={`${project.title} documentation preview`}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="p-3 bg-white">
+              <p className="text-xs text-gray-400 truncate">
+                {project.docsLink.replace(/^https?:\/\//, "")}
+              </p>
+              <p className="text-sm font-semibold text-gray-900 truncate">
+                {project.title}
+              </p>
+              <p className="text-xs text-gray-600 line-clamp-2 mt-0.5">
+                {project.description}
+              </p>
+            </div>
+          </a>
+        </div>
+      ) : (
+        <div className="mb-4">
+          <h5 className="text-sm font-semibold text-gray-900 mb-2">
+            Key Achievements:
+          </h5>
+          <ul className="space-y-1">
+            {project.achievements.map(
+              (achievement: string, achievementIndex: number) => (
+                <li
+                  key={achievementIndex}
+                  className="text-sm text-gray-600 flex items-start"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {achievement}
-              </li>
-            )
-          )}
-        </ul>
-      </div>
+                  <svg
+                    className="w-3 h-3 text-primary mr-2 mt-1 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {achievement}
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+      )}
 
       <div className="flex flex-wrap items-center gap-4">
         {project.repositories
@@ -158,6 +198,30 @@ const Experience = () => {
           >
             <FaExternalLinkAlt className="w-4 h-4 mr-2" />
             Live Demo
+          </a>
+        )}
+        {project.docsLink && (
+          <a
+            href={project.docsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+          >
+            <FaBook className="w-4 h-4 mr-2" />
+            Docs
+          </a>
+        )}
+        {project.npmLink && (
+          <a
+            href={project.npmLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+          >
+            <FaNpm className="w-5 h-5 mr-2" />
+            npm
           </a>
         )}
         {hasDetailPage(project) && (
