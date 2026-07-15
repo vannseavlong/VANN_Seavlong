@@ -120,6 +120,6 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Contact
 
-VANN Seavlong - vannseavlong@gmail.com
+VANN Seavlong - seavlongvann55@gmail.com
 
 Project Link: [https://github.com/vannseavlong/portfolio](https://github.com/vannseavlong/portfolio)
