@@ -14,6 +14,21 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Offsets anchor-scroll targets so the fixed navbar doesn't cover the
+   top of the section (applies to in-page jumps and cross-page /#id links). */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;

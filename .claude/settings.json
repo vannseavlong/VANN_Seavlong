@@ -2,7 +2,30 @@
   "permissions": {
     "allow": [
       "Bash(./node_modules/.bin/tsc --noEmit -p .)",
-      "Bash(node debug_align2.mjs)"
+      "Bash(node debug_align2.mjs)",
+      "Bash(npx next *)",
+      "Bash(curl -s http://localhost:3000/projects/quiz-app)",
+      "Bash(curl -s http://localhost:3000/projects/beasy-cleaning-pest-landing-page)",
+      "Bash(rg -n \"section-padding|\\\\.container\" /Users/suntel/personal/VANN_Seavlong/src/styles/*.css /Users/suntel/personal/VANN_Seavlong/styles/*.css)",
+      "Bash(curl -sf http://localhost:3000)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(NODE_PATH=/Users/suntel/.npm/_npx/e41f203b7505f1fb/node_modules node /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/check.mjs)",
+      "Bash(ln -s /Users/suntel/.npm/_npx/e41f203b7505f1fb/node_modules /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/node_modules)",
+      "Bash(node /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/check.mjs)",
+      "Bash(rm -f /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/node_modules /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/check.mjs)",
+      "Bash(node /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/lsdb.mjs)",
+      "Bash(pkill -f \"next dev\" 2>&1; rm -f /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/node_modules /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/lsdb.mjs)",
+      "Bash(curl -sI https://longcelot-sheet-db.web.app/)",
+      "Bash(pkill -f \"next dev\" 2>&1; rm -f /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/node_modules /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/card.mjs)",
+      "Bash(curl -s https://longcelot-sheet-db.web.app/)",
+      "Bash(curl -sI https://longcelot-sheet-db.web.app/og-image.png)",
+      "Bash(curl -sL https://longcelot-sheet-db.web.app/og-image.png -o /Users/suntel/personal/VANN_Seavlong/public/project/longcelot-sheet-db/og-image.png)",
+      "Bash(sed -i '' \"s/page.locator\\('.experience-card', { hasText: 'longcelot-sheet-db' }\\);/page.locator\\('.experience-card', { hasText: 'longcelot-sheet-db' }\\).last\\(\\);/\" /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/card4.mjs)",
+      "Bash(node /private/tmp/claude-502/-Users-suntel-personal-VANN-Seavlong/49ee5346-b6af-4247-810a-689f4f5ea05c/scratchpad/card4.mjs)",
+      "Bash(pkill -f \"next dev\" 2>&1 *)"
+    ],
+    "additionalDirectories": [
+      "/Users/suntel/.npm/_npx/e41f203b7505f1fb/node_modules"
     ]
   }
 }

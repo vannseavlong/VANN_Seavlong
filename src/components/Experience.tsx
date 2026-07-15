@@ -1,11 +1,23 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 import {
   FaGithub,
   FaExternalLinkAlt,
   FaMapMarkerAlt,
+  FaArrowRight,
+  FaBook,
+  FaNpm,
 } from "react-icons/fa";
 import MilestoneTimeline, { Milestone } from "./MilestoneTimeline";
+import {
+  ProjectItem,
+  ownProjects,
+  schoolProjects,
+  internshipExperiences,
+  hasDetailPage,
+} from "../data/projects";
 
 const journeyMilestones: Milestone[] = [
   {
@@ -35,148 +47,12 @@ const journeyMilestones: Milestone[] = [
 ];
 
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState("projects");
+  const [activeTab, setActiveTab] = useState("own");
+  const [showAllOwn, setShowAllOwn] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showAllInternships, setShowAllInternships] = useState(false);
 
-  const schoolProjects = [
-    {
-      title: "Air Quality Monitoring System",
-      duration: "June 2025 - August 2025",
-      description:
-        "Learn to create an air quality monitoring system using Flutter, FastAPI, connected to Open-meteo live sensor data.",
-      technologies: [
-        "Flutter",
-        "FastAPI",
-        "open-meteo",
-        "XGBOOST model selection",
-      ],
-      githubLink: "https://github.com/LONGCELOT/Air_Quality_Prediction/",
-      achievements: [
-        "Integrate everything together",
-        "Prediction accuracy improvement",
-        "Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong Pimolsaknan, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "Quiz App",
-      duration: "June 2025 - August 2025",
-      description:
-        "Learn to create a quiz app using Flutter and provided API integration",
-      technologies: ["Flutter", "API integration"],
-      githubLink: "https://github.com/LONGCELOT/quizApp/",
-      achievements: [
-        "Integrate everything together",
-        "Prediction accuracy improvement",
-        "Members: VANN Seavlong",
-      ],
-    },
-    {
-      title: "Movie Booking Ticket System",
-      duration: "January 2025 - May 2025",
-      description:
-        "Learn to create a movie booking ticket system using React vite, express, connected to a share database server on Heidy SQL.",
-      technologies: ["React.js", "Express.js", "MySQL", "Heidy SQL"],
-      achievements: [
-        "Learn MySQL queries",
-        "OOP Concepts unlock",
-        "Members: Bin Sodina, Nhek ChanPanha, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "Academic Record System Database + Figma UI",
-      duration: "July 2024 - August 2024",
-      description:
-        "Learn to design a database schema with relationship, ER-Diagram and create a user-friendly UX/UI interface for managing academic records.",
-      technologies: ["MySQL", "Figma", "Mamp server Php my admin"],
-      achievements: [
-        "Learn MySQL queries",
-        "OOP Concepts unlock",
-        "Members: Bin Sodina, Nhek ChanPanha, Chea LivChea, Hong PimolSaknan, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "Rice Quality Detection System",
-      duration: "July 2024 - August 2024",
-      description:
-        "Created own dataset and trained a model to detect the quality of rice. This project allowed me to understand the basics of machine learning and image classification. Yet this project is not fully completed due to time limitations.",
-      technologies: ["Python", "Roboflow", "TensorFlow"],
-      githubLink:
-        "https://github.com/LONGCELOT/Rice-Qualification-Detection.git",
-      achievements: [
-        "Python",
-        "Roboflow",
-        "Members: Bin Sodina, Nhek ChanPanha, Hong PimolSaknan, Mona Ameliazzaman, VANN Seavlong (Me)",
-      ],
-    },
-    {
-      title: "BAW Project at Khmer Enterprise (KE)",
-      duration: "June 2023 - July 2023",
-      description:
-        "Developed a sample website for the BAW project at Khmer Enterprise, related to Digital Education platform which allow student to access the video solution to each exercise from text book base with QR code.",
-      technologies: ["html", "css", "javascript"],
-      githubLink: "https://github.com/LONGCELOT/My-Final-BAW.git",
-      liveLink: "https://longcelot.github.io/My-Final-BAW/",
-      achievements: [
-        "Won a first round award in top 8",
-        "Team Collaboration with 5 members",
-        "Certified by Khmer Enterprise",
-      ],
-    },
-    {
-      title: "Flappy Bird Game Clone",
-      duration: "April 2023 - June 2023",
-      description:
-        "Learn how to build a Flappy Bird game clone using Python and Pygame. This project allow me to understand some basic game development using Pygame.",
-      technologies: ["Python", "Pygame"],
-      githubLink: "https://github.com/LONGCELOT/FlappyBird.git",
-      achievements: [
-        "Implemented a good graphics and sound effects from open-source resources",
-        "The game display the score live and has a game over screen",
-        "Members: VANN Seavlong (Me), Chea LivChea",
-      ],
-    },
-  ];
-
-  const internshipExperiences = [
-    {
-      title: "bEasy: Cleaning & Pest Landing Page",
-      company: "Suntel technology Cambodia",
-      duration: "Present",
-      description:
-        "A landing page for bEasy, a cleaning and pest control service company in Cambodia. The website is built using React.js, JavaScript, and CSS, then refactor to Next.js with shadcn for SEO friendly and it is designed to be responsive and user-friendly.",
-      technologies: [
-        "React",
-        "JavaScript",
-        "CSS",
-        "Firebase",
-        "Next.js",
-        "shadcn",
-        "GA4",
-      ],
-      liveLink: "https://beasy.info/en",
-      achievements: [
-        "Implemented responsive design for mobile and desktop + fully translated in Khmer, English and Chinese",
-        "Integrated Firebase for user performanc and event tracking",
-        "Work as a Frontend Intern contributing to some part of the website while learning from senior developers",
-        "Get some real working experience in a software company environment",
-        "Contributed with some other projects as assigned",
-      ],
-    },
-    {
-      title: "ISI Intern in Marketing Department",
-      company:
-        "ISI Group: Innovation, Striving, Integrity, and Growing together (ISIG)",
-      duration: "January 2024",
-      description:
-        "Assisted in the categories the POSM materials, and develop a digital catalog for ISI products",
-      technologies: ["HTML", "CSS", "JavaScript"],
-      liveLink: "https://catalogue.isisteel.com.kh/",
-      achievements: ["New Experience as first time internship experience"],
-    },
-  ];
-
-  const renderProjectCard = (project: any, index: number) => (
+  const renderProjectCard = (project: ProjectItem, index: number) => (
     <motion.div
       key={project.title}
       initial={{ opacity: 0, y: 50 }}
@@ -219,61 +95,145 @@ const Experience = () => {
         </div>
       </div>
 
-      <div className="mb-4">
-        <h5 className="text-sm font-semibold text-gray-900 mb-2">
-          Key Achievements:
-        </h5>
-        <ul className="space-y-1">
-          {project.achievements.map(
-            (achievement: string, achievementIndex: number) => (
-              <li
-                key={achievementIndex}
-                className="text-sm text-gray-600 flex items-start"
-              >
-                <svg
-                  className="w-3 h-3 text-primary mr-2 mt-1 flex-shrink-0"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+      {project.mediaType === "open-source" &&
+      project.docsLink &&
+      project.docsPreviewImage ? (
+        <div className="mb-4">
+          <h5 className="text-sm font-semibold text-gray-900 mb-2">
+            Docs Preview:
+          </h5>
+          <a
+            href={project.docsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="block rounded-lg overflow-hidden border border-gray-200 hover:border-primary transition-colors duration-300"
+          >
+            <div className="relative w-full aspect-[1200/630] bg-gray-900">
+              <Image
+                src={project.docsPreviewImage}
+                alt={`${project.title} documentation preview`}
+                fill
+                className="object-cover"
+              />
+            </div>
+            <div className="p-3 bg-white">
+              <p className="text-xs text-gray-400 truncate">
+                {project.docsLink.replace(/^https?:\/\//, "")}
+              </p>
+              <p className="text-sm font-semibold text-gray-900 truncate">
+                {project.title}
+              </p>
+              <p className="text-xs text-gray-600 line-clamp-2 mt-0.5">
+                {project.description}
+              </p>
+            </div>
+          </a>
+        </div>
+      ) : (
+        <div className="mb-4">
+          <h5 className="text-sm font-semibold text-gray-900 mb-2">
+            Key Achievements:
+          </h5>
+          <ul className="space-y-1">
+            {project.achievements.map(
+              (achievement: string, achievementIndex: number) => (
+                <li
+                  key={achievementIndex}
+                  className="text-sm text-gray-600 flex items-start"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-                {achievement}
-              </li>
-            )
-          )}
-        </ul>
-      </div>
-
-      {(project.githubLink || project.liveLink) && (
-        <div className="flex gap-4">
-          {project.githubLink && (
-            <a
-              href={project.githubLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-            >
-              <FaGithub className="w-4 h-4 mr-2" />
-              GitHub
-            </a>
-          )}
-          {project.liveLink && (
-            <a
-              href={project.liveLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-            >
-              <FaExternalLinkAlt className="w-4 h-4 mr-2" />
-              Live Demo
-            </a>
-          )}
+                  <svg
+                    className="w-3 h-3 text-primary mr-2 mt-1 flex-shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  {achievement}
+                </li>
+              )
+            )}
+          </ul>
         </div>
       )}
+
+      <div className="flex flex-wrap items-center gap-4">
+        {project.repositories
+          ? project.repositories.map((repo) => (
+              <a
+                key={repo.url}
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+              >
+                <FaGithub className="w-4 h-4 mr-2" />
+                {repo.label}
+              </a>
+            ))
+          : project.githubLink && (
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+              >
+                <FaGithub className="w-4 h-4 mr-2" />
+                GitHub
+              </a>
+            )}
+        {project.liveLink && (
+          <a
+            href={project.liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+          >
+            <FaExternalLinkAlt className="w-4 h-4 mr-2" />
+            Live Demo
+          </a>
+        )}
+        {project.docsLink && (
+          <a
+            href={project.docsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+          >
+            <FaBook className="w-4 h-4 mr-2" />
+            Docs
+          </a>
+        )}
+        {project.npmLink && (
+          <a
+            href={project.npmLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+          >
+            <FaNpm className="w-5 h-5 mr-2" />
+            npm
+          </a>
+        )}
+        {hasDetailPage(project) && (
+          <Link
+            href={`/projects/${project.slug}`}
+            className="flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300 ml-auto"
+          >
+            View Details
+            <FaArrowRight className="w-3 h-3 ml-2" />
+          </Link>
+        )}
+      </div>
     </motion.div>
   );
 
@@ -296,11 +256,31 @@ const Experience = () => {
         </motion.div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-white rounded-lg p-1 shadow-md">
+        <div className="flex justify-center mb-12 px-4">
+          <div className="flex gap-1 max-w-full overflow-x-auto no-scrollbar bg-white rounded-lg p-1 shadow-md">
+            <button
+              onClick={() => setActiveTab("own")}
+              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
+                activeTab === "own"
+                  ? "bg-primary text-white"
+                  : "text-gray-600 hover:text-primary"
+              }`}
+            >
+              Own Project
+            </button>
+            <button
+              onClick={() => setActiveTab("internships")}
+              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
+                activeTab === "internships"
+                  ? "bg-primary text-white"
+                  : "text-gray-600 hover:text-primary"
+              }`}
+            >
+              Company Project
+            </button>
             <button
               onClick={() => setActiveTab("projects")}
-              className={`px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
+              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
                 activeTab === "projects"
                   ? "bg-primary text-white"
                   : "text-gray-600 hover:text-primary"
@@ -308,21 +288,40 @@ const Experience = () => {
             >
               School Projects
             </button>
-            <button
-              onClick={() => setActiveTab("internships")}
-              className={`px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
-                activeTab === "internships"
-                  ? "bg-primary text-white"
-                  : "text-gray-600 hover:text-primary"
-              }`}
-            >
-              Internships
-            </button>
           </div>
         </div>
 
         {/* Tab Content */}
         <div className="space-y-8">
+          {activeTab === "own" && (
+            <>
+              {ownProjects.length === 0 && (
+                <p className="text-center text-gray-500">
+                  No personal projects added yet.
+                </p>
+              )}
+              {(showAllOwn ? ownProjects : ownProjects.slice(0, 3)).map(
+                (project, index) => renderProjectCard(project, index)
+              )}
+              {ownProjects.length > 3 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center mt-8"
+                >
+                  <button
+                    onClick={() => setShowAllOwn(!showAllOwn)}
+                    className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
+                  >
+                    {showAllOwn
+                      ? "Show Less"
+                      : `Show More (${ownProjects.length - 3} more)`}
+                  </button>
+                </motion.div>
+              )}
+            </>
+          )}
           {activeTab === "projects" && (
             <>
               {(showAllProjects
