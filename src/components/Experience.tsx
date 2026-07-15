@@ -10,8 +10,10 @@ import {
 import MilestoneTimeline, { Milestone } from "./MilestoneTimeline";
 import {
   ProjectItem,
+  ownProjects,
   schoolProjects,
   internshipExperiences,
+  hasDetailPage,
 } from "../data/projects";
 
 const journeyMilestones: Milestone[] = [
@@ -42,7 +44,8 @@ const journeyMilestones: Milestone[] = [
 ];
 
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState("projects");
+  const [activeTab, setActiveTab] = useState("own");
+  const [showAllOwn, setShowAllOwn] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
   const [showAllInternships, setShowAllInternships] = useState(false);
 
@@ -119,18 +122,32 @@ const Experience = () => {
       </div>
 
       <div className="flex flex-wrap items-center gap-4">
-        {project.githubLink && (
-          <a
-            href={project.githubLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-          >
-            <FaGithub className="w-4 h-4 mr-2" />
-            GitHub
-          </a>
-        )}
+        {project.repositories
+          ? project.repositories.map((repo) => (
+              <a
+                key={repo.url}
+                href={repo.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+              >
+                <FaGithub className="w-4 h-4 mr-2" />
+                {repo.label}
+              </a>
+            ))
+          : project.githubLink && (
+              <a
+                href={project.githubLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+              >
+                <FaGithub className="w-4 h-4 mr-2" />
+                GitHub
+              </a>
+            )}
         {project.liveLink && (
           <a
             href={project.liveLink}
@@ -143,13 +160,15 @@ const Experience = () => {
             Live Demo
           </a>
         )}
-        <Link
-          href={`/projects/${project.slug}`}
-          className="flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300 ml-auto"
-        >
-          View Details
-          <FaArrowRight className="w-3 h-3 ml-2" />
-        </Link>
+        {hasDetailPage(project) && (
+          <Link
+            href={`/projects/${project.slug}`}
+            className="flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300 ml-auto"
+          >
+            View Details
+            <FaArrowRight className="w-3 h-3 ml-2" />
+          </Link>
+        )}
       </div>
     </motion.div>
   );
@@ -173,11 +192,31 @@ const Experience = () => {
         </motion.div>
 
         {/* Tab Navigation */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-white rounded-lg p-1 shadow-md">
+        <div className="flex justify-center mb-12 px-4">
+          <div className="flex gap-1 max-w-full overflow-x-auto no-scrollbar bg-white rounded-lg p-1 shadow-md">
+            <button
+              onClick={() => setActiveTab("own")}
+              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
+                activeTab === "own"
+                  ? "bg-primary text-white"
+                  : "text-gray-600 hover:text-primary"
+              }`}
+            >
+              Own Project
+            </button>
+            <button
+              onClick={() => setActiveTab("internships")}
+              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
+                activeTab === "internships"
+                  ? "bg-primary text-white"
+                  : "text-gray-600 hover:text-primary"
+              }`}
+            >
+              Company Project
+            </button>
             <button
               onClick={() => setActiveTab("projects")}
-              className={`px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
+              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
                 activeTab === "projects"
                   ? "bg-primary text-white"
                   : "text-gray-600 hover:text-primary"
@@ -185,21 +224,40 @@ const Experience = () => {
             >
               School Projects
             </button>
-            <button
-              onClick={() => setActiveTab("internships")}
-              className={`px-6 py-3 rounded-md font-medium transition-colors duration-300 ${
-                activeTab === "internships"
-                  ? "bg-primary text-white"
-                  : "text-gray-600 hover:text-primary"
-              }`}
-            >
-              Internships
-            </button>
           </div>
         </div>
 
         {/* Tab Content */}
         <div className="space-y-8">
+          {activeTab === "own" && (
+            <>
+              {ownProjects.length === 0 && (
+                <p className="text-center text-gray-500">
+                  No personal projects added yet.
+                </p>
+              )}
+              {(showAllOwn ? ownProjects : ownProjects.slice(0, 3)).map(
+                (project, index) => renderProjectCard(project, index)
+              )}
+              {ownProjects.length > 3 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center mt-8"
+                >
+                  <button
+                    onClick={() => setShowAllOwn(!showAllOwn)}
+                    className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
+                  >
+                    {showAllOwn
+                      ? "Show Less"
+                      : `Show More (${ownProjects.length - 3} more)`}
+                  </button>
+                </motion.div>
+              )}
+            </>
+          )}
           {activeTab === "projects" && (
             <>
               {(showAllProjects

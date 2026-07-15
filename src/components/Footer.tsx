@@ -1,5 +1,6 @@
 import {} from "react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 import {
   FaGithub,
   FaLinkedin,
@@ -12,6 +13,7 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+  const router = useRouter();
   const socialLinks = [
     {
       name: "GitHub",
@@ -68,9 +70,13 @@ const Footer = () => {
   ];
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (router.pathname === "/") {
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push(`/${href}`);
     }
   };
 

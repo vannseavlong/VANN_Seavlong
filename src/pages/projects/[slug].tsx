@@ -6,10 +6,13 @@ import { motion } from "framer-motion";
 import {
   FaGithub,
   FaExternalLinkAlt,
-  FaArrowLeft,
   FaMobileAlt,
+  FaDownload,
+  FaChevronLeft,
 } from "react-icons/fa";
-import { allProjects, ProjectItem } from "../../data/projects";
+import { allProjects, hasDetailPage, ProjectItem } from "../../data/projects";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 interface ProjectPageProps {
   project: ProjectItem;
@@ -24,15 +27,8 @@ export default function ProjectPage({ project }: ProjectPageProps) {
       </Head>
 
       <div className="min-h-screen bg-gray-50">
-        <div className="container section-padding">
-          <Link
-            href="/#experience"
-            className="inline-flex items-center text-gray-600 hover:text-primary transition-colors duration-300 mb-8"
-          >
-            <FaArrowLeft className="w-3 h-3 mr-2" />
-            Back to Portfolio
-          </Link>
-
+        <Navbar />
+        <div className="container section-padding pt-28 sm:pt-32">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -41,9 +37,18 @@ export default function ProjectPage({ project }: ProjectPageProps) {
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
               <div>
-                <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
-                  {project.title}
-                </h1>
+                <div className="flex items-center gap-3 mb-2">
+                  <Link
+                    href="/#experience"
+                    aria-label="Back to Portfolio"
+                    className="flex-shrink-0 w-9 h-9 flex items-center justify-center rounded-full border border-gray-200 text-gray-600 hover:text-primary hover:border-primary transition-colors duration-300"
+                  >
+                    <FaChevronLeft className="w-3.5 h-3.5" />
+                  </Link>
+                  <h1 className="text-3xl lg:text-4xl font-bold text-gray-900">
+                    {project.title}
+                  </h1>
+                </div>
                 {project.company && (
                   <h2 className="text-lg text-primary font-semibold">
                     {project.company}
@@ -101,17 +106,30 @@ export default function ProjectPage({ project }: ProjectPageProps) {
             </div>
 
             <div className="flex flex-wrap gap-4 mb-10">
-              {project.githubLink && (
-                <a
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-                >
-                  <FaGithub className="w-4 h-4 mr-2" />
-                  GitHub
-                </a>
-              )}
+              {project.repositories
+                ? project.repositories.map((repo) => (
+                    <a
+                      key={repo.url}
+                      href={repo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+                    >
+                      <FaGithub className="w-4 h-4 mr-2" />
+                      {repo.label}
+                    </a>
+                  ))
+                : project.githubLink && (
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
+                    >
+                      <FaGithub className="w-4 h-4 mr-2" />
+                      GitHub
+                    </a>
+                  )}
               {project.liveLink && (
                 <a
                   href={project.liveLink}
@@ -121,6 +139,16 @@ export default function ProjectPage({ project }: ProjectPageProps) {
                 >
                   <FaExternalLinkAlt className="w-4 h-4 mr-2" />
                   Visit Live Site
+                </a>
+              )}
+              {project.mediaType === "app" && project.apkLink && (
+                <a
+                  href={project.apkLink}
+                  download
+                  className="btn-primary px-6 py-2 rounded-full font-medium inline-flex items-center hover:transform hover:scale-105 transition-all duration-300"
+                >
+                  <FaDownload className="w-4 h-4 mr-2" />
+                  Download APK
                 </a>
               )}
             </div>
@@ -135,13 +163,13 @@ export default function ProjectPage({ project }: ProjectPageProps) {
                     {project.screenshots.map((src) => (
                       <div
                         key={src}
-                        className="relative aspect-[9/16] rounded-xl overflow-hidden border border-gray-200 shadow-sm"
+                        className="relative aspect-[9/20] rounded-xl overflow-hidden border border-gray-200 shadow-sm"
                       >
                         <Image
                           src={src}
                           alt={`${project.title} screenshot`}
                           fill
-                          className="object-cover"
+                          className="object-contain"
                         />
                       </div>
                     ))}
@@ -156,6 +184,7 @@ export default function ProjectPage({ project }: ProjectPageProps) {
             )}
           </motion.div>
         </div>
+        <Footer />
       </div>
     </>
   );
@@ -163,9 +192,11 @@ export default function ProjectPage({ project }: ProjectPageProps) {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: allProjects.map((project) => ({
-      params: { slug: project.slug },
-    })),
+    paths: allProjects
+      .filter(hasDetailPage)
+      .map((project) => ({
+        params: { slug: project.slug },
+      })),
     fallback: false,
   };
 };

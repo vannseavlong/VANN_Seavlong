@@ -9,12 +9,62 @@ export interface ProjectItem {
   technologies: string[];
   achievements: string[];
   githubLink?: string;
+  /** Use instead of githubLink when a project has more than one repo (e.g. app + backend) */
+  repositories?: { label: string; url: string }[];
   liveLink?: string;
   /** "app" -> detail page shows a screenshot gallery, "web" -> detail page links out to liveLink */
   mediaType: ProjectMediaType;
   /** Screenshot paths under /public, only used when mediaType === "app" */
   screenshots?: string[];
+  /** Path/URL to a downloadable .apk, only used when mediaType === "app" */
+  apkLink?: string;
+  /** Set to false to skip generating a /projects/[slug] page and hide "View Details". Defaults to true. */
+  hasDetailPage?: boolean;
 }
+
+export const ownProjects: ProjectItem[] = [
+  {
+    slug: "paw-pet-service-booking-app",
+    title: "Paw: Pet Service Booking App",
+    duration: "June 1 - 12, 2026",
+    description:
+      "A mobile app for booking pet care and carrying services such as boarding and walking, backed by a custom lightweight backend.",
+    technologies: [
+      "Flutter",
+      "Dart",
+      "GetX",
+      "Dio",
+      "Node.js",
+      "TypeScript",
+      "Express 5",
+      "Google Sheets DB",
+      "Google OAuth",
+      "Render",
+    ],
+    achievements: [
+      "Built with Clean Architecture across four layers (presentation, domain, data, and a shared core) with a strict inward dependency flow",
+      "Implemented an offline first repository pattern with Dio that falls back to a local in memory cache when the API is unreachable",
+      "Added Google OAuth login via deep links, with tokens stored securely using flutter_secure_storage",
+      "Designed a custom design system with color tokens, typography (Fraunces and DM Sans/Mono), and a spacing scale",
+      "Built a custom backend that uses Google Sheets as the datastore through a self made, schema validated ORM style library (longcelot-sheet-db)",
+      "Implemented REST APIs for auth, profiles, bookings, and services using Express 5 and JWT sessions, deployed on Render with separate dev and prod build flavors",
+    ],
+    repositories: [
+      { label: "Mobile App", url: "https://github.com/vannseavlong/pet_carring" },
+      { label: "Backend", url: "https://github.com/vannseavlong/backend_paw" },
+    ],
+    mediaType: "app",
+    screenshots: [
+      "/project/paw/Home.jpg",
+      "/project/paw/Login-Signup.jpg",
+      "/project/paw/Booking.jpg",
+      "/project/paw/StayList.jpg",
+      "/project/paw/Profile.jpg",
+      "/project/paw/Logout.jpg",
+    ],
+    apkLink: "/downloads/paw.apk",
+  },
+];
 
 export const schoolProjects: ProjectItem[] = [
   {
@@ -160,6 +210,7 @@ export const internshipExperiences: ProjectItem[] = [
       "Contributed with some other projects as assigned",
     ],
     mediaType: "web",
+    hasDetailPage: false,
   },
   {
     slug: "isi-marketing-internship",
@@ -173,13 +224,18 @@ export const internshipExperiences: ProjectItem[] = [
     liveLink: "https://catalogue.isisteel.com.kh/",
     achievements: ["New Experience as first time internship experience"],
     mediaType: "web",
+    hasDetailPage: false,
   },
 ];
 
 export const allProjects: ProjectItem[] = [
+  ...ownProjects,
   ...schoolProjects,
   ...internshipExperiences,
 ];
 
+export const hasDetailPage = (project: ProjectItem): boolean =>
+  project.hasDetailPage !== false;
+
 export const getProjectBySlug = (slug: string): ProjectItem | undefined =>
-  allProjects.find((project) => project.slug === slug);
+  allProjects.find((project) => project.slug === slug && hasDetailPage(project));
