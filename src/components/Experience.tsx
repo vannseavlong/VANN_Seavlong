@@ -1,22 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  FaGithub,
-  FaExternalLinkAlt,
-  FaMapMarkerAlt,
-  FaArrowRight,
-  FaBook,
-  FaNpm,
-} from "react-icons/fa";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import MilestoneTimeline, { Milestone } from "./MilestoneTimeline";
+import ProjectCard from "./ProjectCard";
 import {
-  ProjectItem,
   ownProjects,
   schoolProjects,
   internshipExperiences,
-  hasDetailPage,
 } from "../data/projects";
 
 const journeyMilestones: Milestone[] = [
@@ -46,196 +36,39 @@ const journeyMilestones: Milestone[] = [
   },
 ];
 
+const INITIAL_VISIBLE = 6;
+
+const tabs = [
+  {
+    id: "own",
+    label: "Own Project",
+    projects: ownProjects,
+    emptyText: "No personal projects added yet.",
+  },
+  {
+    id: "internships",
+    label: "Company Project",
+    projects: internshipExperiences,
+    emptyText: "No company projects added yet.",
+  },
+  {
+    id: "projects",
+    label: "School Projects",
+    projects: schoolProjects,
+    emptyText: "No school projects added yet.",
+  },
+];
+
 const Experience = () => {
-  const [activeTab, setActiveTab] = useState("own");
-  const [showAllOwn, setShowAllOwn] = useState(false);
-  const [showAllProjects, setShowAllProjects] = useState(false);
-  const [showAllInternships, setShowAllInternships] = useState(false);
+  const [activeTabId, setActiveTabId] = useState(tabs[0].id);
+  const [expandedTabs, setExpandedTabs] = useState<Record<string, boolean>>({});
 
-  const renderProjectCard = (project: ProjectItem, index: number) => (
-    <motion.div
-      key={project.title}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: index * 0.2 }}
-      viewport={{ once: true }}
-      className="experience-card"
-    >
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-        <div>
-          <h3 className="text-xl font-bold text-gray-900 mb-1">
-            {project.title}
-          </h3>
-          {project.company && (
-            <h4 className="text-lg text-primary font-semibold mb-2">
-              {project.company}
-            </h4>
-          )}
-        </div>
-        <span className="text-sm text-gray-500 font-medium">
-          {project.duration}
-        </span>
-      </div>
-
-      <p className="text-gray-600 mb-4">{project.description}</p>
-
-      <div className="mb-4">
-        <h5 className="text-sm font-semibold text-gray-900 mb-2">
-          Technologies:
-        </h5>
-        <div className="flex flex-wrap gap-2">
-          {project.technologies.map((tech: string, techIndex: number) => (
-            <span
-              key={techIndex}
-              className="px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {project.mediaType === "open-source" &&
-      project.docsLink &&
-      project.docsPreviewImage ? (
-        <div className="mb-4">
-          <h5 className="text-sm font-semibold text-gray-900 mb-2">
-            Docs Preview:
-          </h5>
-          <a
-            href={project.docsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="block rounded-lg overflow-hidden border border-gray-200 hover:border-primary transition-colors duration-300"
-          >
-            <div className="relative w-full aspect-[1200/630] bg-gray-900">
-              <Image
-                src={project.docsPreviewImage}
-                alt={`${project.title} documentation preview`}
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-3 bg-white">
-              <p className="text-xs text-gray-400 truncate">
-                {project.docsLink.replace(/^https?:\/\//, "")}
-              </p>
-              <p className="text-sm font-semibold text-gray-900 truncate">
-                {project.title}
-              </p>
-              <p className="text-xs text-gray-600 line-clamp-2 mt-0.5">
-                {project.description}
-              </p>
-            </div>
-          </a>
-        </div>
-      ) : (
-        <div className="mb-4">
-          <h5 className="text-sm font-semibold text-gray-900 mb-2">
-            Key Achievements:
-          </h5>
-          <ul className="space-y-1">
-            {project.achievements.map(
-              (achievement: string, achievementIndex: number) => (
-                <li
-                  key={achievementIndex}
-                  className="text-sm text-gray-600 flex items-start"
-                >
-                  <svg
-                    className="w-3 h-3 text-primary mr-2 mt-1 flex-shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                  {achievement}
-                </li>
-              )
-            )}
-          </ul>
-        </div>
-      )}
-
-      <div className="flex flex-wrap items-center gap-4">
-        {project.repositories
-          ? project.repositories.map((repo) => (
-              <a
-                key={repo.url}
-                href={repo.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-              >
-                <FaGithub className="w-4 h-4 mr-2" />
-                {repo.label}
-              </a>
-            ))
-          : project.githubLink && (
-              <a
-                href={project.githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-              >
-                <FaGithub className="w-4 h-4 mr-2" />
-                GitHub
-              </a>
-            )}
-        {project.liveLink && (
-          <a
-            href={project.liveLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-          >
-            <FaExternalLinkAlt className="w-4 h-4 mr-2" />
-            Live Demo
-          </a>
-        )}
-        {project.docsLink && (
-          <a
-            href={project.docsLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-          >
-            <FaBook className="w-4 h-4 mr-2" />
-            Docs
-          </a>
-        )}
-        {project.npmLink && (
-          <a
-            href={project.npmLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="flex items-center text-gray-600 hover:text-primary transition-colors duration-300"
-          >
-            <FaNpm className="w-5 h-5 mr-2" />
-            npm
-          </a>
-        )}
-        {hasDetailPage(project) && (
-          <Link
-            href={`/projects/${project.slug}`}
-            className="flex items-center text-primary font-medium hover:text-primary/80 transition-colors duration-300 ml-auto"
-          >
-            View Details
-            <FaArrowRight className="w-3 h-3 ml-2" />
-          </Link>
-        )}
-      </div>
-    </motion.div>
-  );
+  const activeTab = tabs.find((tab) => tab.id === activeTabId) ?? tabs[0];
+  const expanded = expandedTabs[activeTab.id] ?? false;
+  const visibleProjects = expanded
+    ? activeTab.projects
+    : activeTab.projects.slice(0, INITIAL_VISIBLE);
+  const hiddenCount = activeTab.projects.length - INITIAL_VISIBLE;
 
   return (
     <section id="experience" className="section-padding bg-gray-50">
@@ -258,123 +91,53 @@ const Experience = () => {
         {/* Tab Navigation */}
         <div className="flex justify-center mb-12 px-4">
           <div className="flex gap-1 max-w-full overflow-x-auto no-scrollbar bg-white rounded-lg p-1 shadow-md">
-            <button
-              onClick={() => setActiveTab("own")}
-              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
-                activeTab === "own"
-                  ? "bg-primary text-white"
-                  : "text-gray-600 hover:text-primary"
-              }`}
-            >
-              Own Project
-            </button>
-            <button
-              onClick={() => setActiveTab("internships")}
-              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
-                activeTab === "internships"
-                  ? "bg-primary text-white"
-                  : "text-gray-600 hover:text-primary"
-              }`}
-            >
-              Company Project
-            </button>
-            <button
-              onClick={() => setActiveTab("projects")}
-              className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
-                activeTab === "projects"
-                  ? "bg-primary text-white"
-                  : "text-gray-600 hover:text-primary"
-              }`}
-            >
-              School Projects
-            </button>
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTabId(tab.id)}
+                className={`flex-shrink-0 whitespace-nowrap px-4 py-2 text-sm sm:px-6 sm:py-3 sm:text-base rounded-md font-medium transition-colors duration-300 ${
+                  activeTab.id === tab.id
+                    ? "bg-primary text-white"
+                    : "text-gray-600 hover:text-primary"
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
           </div>
         </div>
 
         {/* Tab Content */}
-        <div className="space-y-8">
-          {activeTab === "own" && (
-            <>
-              {ownProjects.length === 0 && (
-                <p className="text-center text-gray-500">
-                  No personal projects added yet.
-                </p>
-              )}
-              {(showAllOwn ? ownProjects : ownProjects.slice(0, 3)).map(
-                (project, index) => renderProjectCard(project, index)
-              )}
-              {ownProjects.length > 3 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-center mt-8"
-                >
-                  <button
-                    onClick={() => setShowAllOwn(!showAllOwn)}
-                    className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
-                  >
-                    {showAllOwn
-                      ? "Show Less"
-                      : `Show More (${ownProjects.length - 3} more)`}
-                  </button>
-                </motion.div>
-              )}
-            </>
-          )}
-          {activeTab === "projects" && (
-            <>
-              {(showAllProjects
-                ? schoolProjects
-                : schoolProjects.slice(0, 3)
-              ).map((project, index) => renderProjectCard(project, index))}
-              {schoolProjects.length > 3 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-center mt-8"
-                >
-                  <button
-                    onClick={() => setShowAllProjects(!showAllProjects)}
-                    className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
-                  >
-                    {showAllProjects
-                      ? "Show Less"
-                      : `Show More (${schoolProjects.length - 3} more)`}
-                  </button>
-                </motion.div>
-              )}
-            </>
-          )}
-          {activeTab === "internships" && (
-            <>
-              {(showAllInternships
-                ? internshipExperiences
-                : internshipExperiences.slice(0, 3)
-              ).map((experience, index) =>
-                renderProjectCard(experience, index)
-              )}
-              {internshipExperiences.length > 3 && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="text-center mt-8"
-                >
-                  <button
-                    onClick={() => setShowAllInternships(!showAllInternships)}
-                    className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
-                  >
-                    {showAllInternships
-                      ? "Show Less"
-                      : `Show More (${internshipExperiences.length - 3} more)`}
-                  </button>
-                </motion.div>
-              )}
-            </>
-          )}
-        </div>
+        {activeTab.projects.length === 0 ? (
+          <p className="text-center text-gray-500">{activeTab.emptyText}</p>
+        ) : (
+          <div className="project-grid">
+            {visibleProjects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} />
+            ))}
+          </div>
+        )}
+
+        {hiddenCount > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mt-10"
+          >
+            <button
+              onClick={() =>
+                setExpandedTabs((prev) => ({
+                  ...prev,
+                  [activeTab.id]: !expanded,
+                }))
+              }
+              className="btn-primary px-8 py-3 rounded-full font-medium hover:transform hover:scale-105 transition-all duration-300"
+            >
+              {expanded ? "Show Less" : `Show More (${hiddenCount} more)`}
+            </button>
+          </motion.div>
+        )}
 
         <div className="mt-16 sm:mt-24">
           <MilestoneTimeline milestones={journeyMilestones} startLabel="2021" endLabel="Now" />

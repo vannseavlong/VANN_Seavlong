@@ -22,8 +22,10 @@ export interface ProjectItem {
   docsLink?: string;
   /** npm registry page, mainly used when mediaType === "open-source" */
   npmLink?: string;
-  /** OG image for docsLink, rendered as a link-preview card on the project card instead of Key Achievements */
+  /** OG image for docsLink, used as the project card cover when coverImage isn't set */
   docsPreviewImage?: string;
+  /** Preview image for the project card cover (any project). Falls back to docsPreviewImage, then app screenshots, then a generated gradient. */
+  coverImage?: string;
   /** Set to false to skip generating a /projects/[slug] page and hide "View Details". Defaults to true. */
   hasDetailPage?: boolean;
 }
