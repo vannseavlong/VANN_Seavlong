@@ -14,25 +14,21 @@ const journeyMilestones: Milestone[] = [
     icon: FaMapMarkerAlt,
     label: "2022",
     description: "Go to CamTech University",
-    indicator: "walk",
   },
   {
     icon: FaMapMarkerAlt,
     label: "2024",
     description: "Short Intern at ISI Group",
-    indicator: "motor",
   },
   {
     icon: FaMapMarkerAlt,
     label: "July 2025",
     description: "Frontend Intern part-time at Suntel Technology",
-    indicator: "car",
   },
   {
     icon: FaMapMarkerAlt,
     label: "January 2026 - Now",
     description: "Junior Frontend Developer at Suntel Technology",
-    indicator: "plane",
   },
 ];
 
@@ -140,6 +136,20 @@ const Experience = () => {
         )}
 
         <div className="mt-16 sm:mt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3">
+              My <span className="text-gradient">Journey</span>
+            </h3>
+            <p className="text-gray-600 max-w-xl mx-auto">
+              A quick look at the road that got me here.
+            </p>
+          </motion.div>
           <MilestoneTimeline milestones={journeyMilestones} startLabel="2021" endLabel="Now" />
         </div>
       </div>

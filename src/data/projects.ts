@@ -104,6 +104,37 @@ export const ownProjects: ProjectItem[] = [
     npmLink: "https://www.npmjs.com/package/longcelot-sheet-db",
     docsPreviewImage: "/project/longcelot-sheet-db/og-image.png",
   },
+  {
+    slug: "project-control-center",
+    title: "Project Control Center",
+    duration: "2026",
+    description:
+      "A single Mission Control dashboard for side projects: live backend uptime, frontend deploy status, and a roster of Claude Code agents, all backed by a Google Sheet instead of a hosted database.",
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS",
+      "Radix UI",
+      "TanStack Query",
+      "dnd-kit",
+      "Google Sheets DB",
+      "Google OAuth",
+      "GitHub Actions",
+      "Turborepo",
+      "pnpm",
+    ],
+    achievements: [
+      "Built a live uptime monitor that pings every Render service, auto-detects /health endpoints, wakes sleeping free-tier instances on demand, and keeps a response-time history",
+      "Integrated the Vercel API for live deploy status per project, paired with auto-scraped Open Graph thumbnails so cards show what each site actually looks like without a screenshot service",
+      "Shipped a full CRUD portal for projects, agents, and settings, gated behind email/password or Google OAuth for a single allowlisted account",
+      "Used longcelot-sheet-db (a self-published npm package) as a schema-first typed data layer, so a Google Sheet behaves like a real database from the app's perspective",
+      "Wired a self-triggering GitHub Actions cron to hit the health-check endpoint every 10 minutes, keeping free-tier backends warm without a paid cron tier",
+      "Structured as a pnpm + Turborepo monorepo with shared UI, types, and config packages across the Next.js portal and a local agent-bridge daemon",
+    ],
+    liveLink: "https://pcclongcelot.vercel.app/",
+    mediaType: "web",
+  },
 ];
 
 export const schoolProjects: ProjectItem[] = [
