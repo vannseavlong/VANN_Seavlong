@@ -135,6 +135,37 @@ export const ownProjects: ProjectItem[] = [
     liveLink: "https://pcclongcelot.vercel.app/",
     mediaType: "web",
   },
+  {
+    slug: "birthday-wish",
+    title: "Birthday Wish",
+    duration: "2026",
+    description:
+      "A personalized, animated birthday experience delivered as a single shareable link, no backend: a wish, candles to blow out, a selfie with a birthday hat, and a keepsake card to download.",
+    technologies: [
+      "React 18",
+      "TypeScript",
+      "Vite",
+      "Tailwind CSS v4",
+      "Framer Motion",
+      "Radix UI",
+      "shadcn/ui",
+      "Web Audio API",
+      "Canvas 2D",
+      "html2canvas",
+      "jsPDF",
+    ],
+    achievements: [
+      "Built a URL-personalized landing flow (name and birth date read from query params) with no routing or backend required",
+      "Animated a candle-blowing sequence with confetti and balloons, synced to a 'Happy Birthday' melody synthesized in-browser via the Web Audio API",
+      "Implemented selfie capture with getUserMedia, compositing a birthday-hat overlay onto the photo via Canvas 2D, with graceful degradation when the camera is denied or unavailable",
+      "Rendered a pixel-accurate keepsake card through an isolated iframe and exported it client-side as PNG or PDF with html2canvas + jsPDF",
+      "Tuned the full flow to be responsive across mobile, tablet, and desktop, with a replay path that resets state without reloading the page",
+    ],
+    githubLink: "https://github.com/vannseavlong/BD-Wish",
+    liveLink: "https://bd-wish-two.vercel.app/",
+    mediaType: "web",
+    coverImage: "/project/birthday-wish/og-image.png",
+  },
 ];
 
 export const schoolProjects: ProjectItem[] = [
