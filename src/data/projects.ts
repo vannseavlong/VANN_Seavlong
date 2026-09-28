@@ -134,6 +134,7 @@ export const ownProjects: ProjectItem[] = [
     ],
     liveLink: "https://pcclongcelot.vercel.app/",
     mediaType: "web",
+    coverImage: "/images/projects/pcc/opengraph-image.png",
   },
   {
     slug: "birthday-wish",
