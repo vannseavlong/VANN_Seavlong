@@ -198,6 +198,34 @@ export const ownProjects: ProjectItem[] = [
     mediaType: "web",
     coverImage: "/images/projects/khmer-typing/opengraph-image.png",
   },
+  {
+    slug: "ib-math-guide",
+    title: "IB Math Guide",
+    duration: "2026",
+    description:
+      "A free teaching platform for IB Mathematics, built for my own Grade 11 students. It starts with an honest AA vs AI decision guide, then leads into per-unit lessons, interactive practice with unlockable model answers, printable worksheets and exam-style mock papers.",
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "KaTeX",
+      "next/og",
+    ],
+    achievements: [
+      "Wrote a decision guide that compares Analysis & Approaches and Applications & Interpretation side by side, including SL vs HL, career paths and an FAQ",
+      "Designed lesson pages with a consistent structure: key idea, formula boxes, worked examples, then practice with collapsible solutions",
+      "Built interactive practice where students enter answers, finish the set, receive a key, and unlock a side-by-side comparison with model answers",
+      "Added mock paper review pages (Paper 1, 2, 3) and printable worksheets with question and answer export modes",
+      "Rendered all maths server-side with KaTeX, with print-ready styles, keyboard-accessible navigation and a generated Open Graph image",
+      "Drove the curriculum pages from a single data file and stored answer keys in source so they stay stable for teachers, making new units quick to add",
+    ],
+    githubLink:
+      "https://github.com/vannseavlong/vann-seavlong-teaching-material",
+    liveLink: "https://vann-seavlong-teaching-material.vercel.app/",
+    mediaType: "web",
+    coverImage: "/images/projects/ib-math-guide/opengraph-image.png",
+  },
 ];
 
 export const schoolProjects: ProjectItem[] = [
