@@ -167,6 +167,37 @@ export const ownProjects: ProjectItem[] = [
     mediaType: "web",
     coverImage: "/project/birthday-wish/og-image.png",
   },
+  {
+    slug: "khmer-typing-practice",
+    title: "Khmer Typing Practice",
+    duration: "2026",
+    description:
+      "A Khmer Unicode typing tutor built from scratch around Khmer's own input model, not a Latin typing-test template with a word list swapped in: real-time per-character feedback, a finger-guided visual keyboard, and a step-by-step breakdown of how each syllable is actually typed.",
+    technologies: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Framer Motion",
+      "Zustand",
+      "next/og",
+      "Web Audio API",
+      "canvas-confetti",
+      "Turbopack",
+    ],
+    achievements: [
+      "Built a syllable-aware diffing input that reads raw IME keystrokes from a hidden input, buffering a standalone coeng marker until its subscript consonant arrives so coeng clusters are never split mid-cluster",
+      "Wrote a keystroke decomposition engine that breaks any Khmer word into an ordered list of physical keystrokes with finger assignment, powering both a live 'how to type this' panel and an interactive rule-by-rule tutorial",
+      "Maintained two independent keyboard maps (Windows NiDA and macOS Apple Khmer) in both code-to-character and character-to-code directions, switchable live mid-session without losing state",
+      "Built a finger-guided visual keyboard with an animated SVG hand diagram that highlights the next finger to move, derived live from the current target character",
+      "Shipped a fully client-only, static-export-friendly architecture (Zustand + localStorage, no backend) with a server-rendered next/og OG image generated per request",
+      "Structured practice into 5 levels (consonants/vowels, words, sentences, coeng clusters, speed-mix review) with WPM/accuracy/streak tracking and persisted personal bests",
+    ],
+    githubLink: "https://github.com/vannseavlong/khmer-typing",
+    liveLink: "https://khmer-typing-lime.vercel.app",
+    mediaType: "web",
+    coverImage: "/images/projects/khmer-typing/opengraph-image.png",
+  },
 ];
 
 export const schoolProjects: ProjectItem[] = [
