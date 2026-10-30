@@ -6,6 +6,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+        <meta name="google-site-verification" content="4Eq45U774Op8r1O-a0BIrlx73jEG9xsxpwQI9m0miPM" />
         <meta name="description" content="VANN Seavlong - Software Engineer & Full Stack Developer Portfolio" />
         <meta name="theme-color" content="#2563eb" />
         <link rel="icon" type="image/png" href="/images/Me-logo-New.png" />
