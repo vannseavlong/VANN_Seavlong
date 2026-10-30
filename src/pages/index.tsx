@@ -20,6 +20,16 @@ export default function Home() {
           content="VANN Seavlong - Software Engineer & Full Stack Developer Portfolio"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="canonical" href="https://vann-seavlong.vercel.app/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="VANN Seavlong - Portfolio" />
+        <meta property="og:description" content="VANN Seavlong - Software Engineer & Full Stack Developer Portfolio" />
+        <meta property="og:url" content="https://vann-seavlong.vercel.app/" />
+        <meta property="og:image" content="https://vann-seavlong.vercel.app/images/Me-logo-New.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="VANN Seavlong - Portfolio" />
+        <meta name="twitter:description" content="VANN Seavlong - Software Engineer & Full Stack Developer Portfolio" />
+        <meta name="twitter:image" content="https://vann-seavlong.vercel.app/images/Me-logo-New.png" />
       </Head>
       <div className="min-h-screen bg-gray-50">
         <Navbar />

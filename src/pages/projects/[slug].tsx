@@ -26,6 +26,14 @@ export default function ProjectPage({ project }: ProjectPageProps) {
       <Head>
         <title>{project.title} - VANN Seavlong</title>
         <meta name="description" content={project.description} />
+        <link rel="canonical" href={`https://vann-seavlong.vercel.app/projects/${project.slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${project.title} - VANN Seavlong`} />
+        <meta property="og:description" content={project.description} />
+        <meta property="og:url" content={`https://vann-seavlong.vercel.app/projects/${project.slug}`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${project.title} - VANN Seavlong`} />
+        <meta name="twitter:description" content={project.description} />
       </Head>
 
       <div className="min-h-screen bg-gray-50">
